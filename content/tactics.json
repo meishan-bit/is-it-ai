@@ -1,0 +1,199 @@
+{
+  "tactics": [
+    {
+      "id": "T1",
+      "name": "A grandchild in trouble",
+      "arrives_by": "Phone call, then a fake \"lawyer\"",
+      "red_flags": [
+        "Panic and a rush",
+        "\"Don't tell Mom\"",
+        "Cash for bail",
+        "A courier who picks up money at your home"
+      ],
+      "safe_step": "Hang up. Call your grandchild or a parent on a number you already have. Police never collect cash bail.",
+      "source_labels": [
+        "Kingston Police",
+        "RCMP NL"
+      ],
+      "source_urls": [
+        "https://www.kingstonpolice.ca/news/posts/police-see-recent-increase-in-reports-of-grandparent-scam/",
+        "https://rcmp.ca/en/nl/news/2025/06/rcmp-nl-warns-public-grandparent-scam-current-circulation"
+      ]
+    },
+    {
+      "id": "T2",
+      "name": "A bank \"investigator\"",
+      "arrives_by": "Phone call or text about \"suspicious activity\"",
+      "red_flags": [
+        "Asks you to withdraw cash or buy gift cards",
+        "Asks you to hand over your card",
+        "\"Help us catch a dishonest employee\""
+      ],
+      "safe_step": "Hang up. Call the number on the back of your card.",
+      "source_labels": [
+        "Edmonton Police",
+        "Napanee Today"
+      ],
+      "source_urls": [
+        "https://www.edmontonpolice.ca/News/MediaReleases/ATIfraudsuspectsFeb25",
+        "https://www.napaneetoday.ca/?p=98810"
+      ]
+    },
+    {
+      "id": "T3",
+      "name": "A government refund or benefit",
+      "arrives_by": "Text or email",
+      "red_flags": [
+        "A refund or benefit that is \"waiting\"",
+        "An Interac e-Transfer link",
+        "A deadline"
+      ],
+      "safe_step": "Don't click. Check your CRA My Account by typing the address yourself. The CRA never sends e-transfers.",
+      "source_labels": [
+        "CRA scam alerts",
+        "CRA: Recognize a scam"
+      ],
+      "source_urls": [
+        "https://www.canada.ca/en/revenue-agency/corporate/security/protect-yourself-against-fraud/scam-alerts.html",
+        "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam"
+      ]
+    },
+    {
+      "id": "T4",
+      "name": "A parcel delivery fee",
+      "arrives_by": "Text",
+      "red_flags": [
+        "A very small unpaid fee",
+        "A link to \"release\" your parcel"
+      ],
+      "safe_step": "Delete it. Track parcels only in the seller's own app or website.",
+      "source_labels": [
+        "Canada Post"
+      ],
+      "source_urls": [
+        "https://www.canadapost-postescanada.ca/cpc/en/support/kb/company-policies/privacy-security/what-do-to-if-you-get-suspicious-email.page"
+      ]
+    },
+    {
+      "id": "T5",
+      "name": "An unpaid toll or fine",
+      "arrives_by": "Text",
+      "red_flags": [
+        "A threat about your licence or credit",
+        "A 24-hour deadline",
+        "A link to pay"
+      ],
+      "safe_step": "Sign in to the real account by typing the address yourself. Never pay from a text link.",
+      "source_labels": [
+        "Insauga (407 ETR)",
+        "Stratford Today"
+      ],
+      "source_urls": [
+        "https://www.insauga.com/highway-407-scam-targeting-people-in-ontario/",
+        "https://stratfordtoday.ca/local-news/new-scam-text-claiming-unsettled-etr-violation-10365080"
+      ]
+    },
+    {
+      "id": "T6",
+      "name": "A tech-support warning",
+      "arrives_by": "Browser pop-up or cold call",
+      "red_flags": [
+        "A red alarm screen and a countdown",
+        "\"Call Microsoft now\"",
+        "A request to let them connect to your device"
+      ],
+      "safe_step": "Close the browser, or restart the device if it won't close. Never call the number shown.",
+      "source_labels": [
+        "Q101 / BC Crime Stoppers",
+        "CAFC Frauds A-Z"
+      ],
+      "source_urls": [
+        "https://q101.ca/?p=29347",
+        "https://antifraudcentre-centreantifraude.ca/scams-fraudes/azindex-eng.htm"
+      ]
+    },
+    {
+      "id": "T7",
+      "name": "A famous face in an investment ad",
+      "arrives_by": "Social media video ad",
+      "red_flags": [
+        "A \"government-backed\" platform",
+        "Guaranteed returns",
+        "A small first deposit"
+      ],
+      "safe_step": "Don't click. Check any program on canada.ca and any firm with your securities regulator.",
+      "source_labels": [
+        "Toronto Guardian"
+      ],
+      "source_urls": [
+        "https://torontoguardian.com/?p=117722"
+      ]
+    },
+    {
+      "id": "T8",
+      "name": "An online romance",
+      "arrives_by": "Dating site or social media",
+      "red_flags": [
+        "Never on live video",
+        "A sudden emergency",
+        "Asks for money or crypto"
+      ],
+      "safe_step": "Talk to someone you trust before you send anything. Reverse-search the photos.",
+      "source_labels": [
+        "Oyen Echo (RCMP)",
+        "CAFC Frauds A-Z"
+      ],
+      "source_urls": [
+        "https://www.oyenecho.com/articles/rcmp-warns-public-to-watch-for-rise-of-ai-powered-scams",
+        "https://antifraudcentre-centreantifraude.ca/scams-fraudes/azindex-eng.htm"
+      ]
+    },
+    {
+      "id": "T9",
+      "name": "A fake kidnapping call",
+      "arrives_by": "Phone call",
+      "red_flags": [
+        "Threats and \"stay on the line\"",
+        "\"Don't call the police\"",
+        "Payment right now"
+      ],
+      "safe_step": "Hang up if you can. Reach the person another way. Call 911 if you're worried.",
+      "source_labels": [
+        "NetNewsLedger"
+      ],
+      "source_urls": [
+        "https://www.netnewsledger.com/?p=209510"
+      ]
+    },
+    {
+      "id": "T10",
+      "name": "A fake fraud-recovery offer",
+      "arrives_by": "Phone or email",
+      "red_flags": [
+        "Offers to get your lost money back for a fee",
+        "Asks for your banking details",
+        "Official-sounding names and titles"
+      ],
+      "safe_step": "Hang up. The CAFC never asks for money.",
+      "source_labels": [
+        "CAFC"
+      ],
+      "source_urls": [
+        "https://www.antifraudcentre-centreantifraude.ca/index-eng.htm"
+      ]
+    },
+    {
+      "id": "real",
+      "name": "A genuine message",
+      "arrives_by": "Text, call or email from someone or somewhere you know",
+      "red_flags": [
+        "No link",
+        "No payment or personal details asked for",
+        "No secrecy and no rush"
+      ],
+      "safe_step": "Reply as you normally would, or call the number you already have if you're unsure.",
+      "source_labels": [],
+      "source_urls": []
+    }
+  ]
+}

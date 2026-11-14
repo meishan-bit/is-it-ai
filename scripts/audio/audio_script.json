@@ -1,0 +1,72 @@
+{
+  "_readme": "Source of truth for the four voice clips (M2-M5). Text comes from the Week 2 content pack. All voices are fully synthetic (Kokoro neural TTS); none is a clone of a real person. Edit the text or voices here, then run: python scripts/audio/generate_audio.py",
+  "clips": [
+    {
+      "id": "M2",
+      "for": "S08",
+      "title": "Voicemail: 'We have your granddaughter'",
+      "target_seconds": "about 20",
+      "segments": [
+        {
+          "speaker": "Emily (young woman, crying, rushed)",
+          "voice": "af_nova",
+          "speed": 1.08,
+          "text": "Grandpa? Grandpa, it's me, it's Emily. Please, I'm in really big trouble, they won't let me go..."
+        },
+        {
+          "speaker": "Caller (man, calm and firm)",
+          "voice": "am_onyx",
+          "speed": 0.92,
+          "pause_before_ms": 350,
+          "text": "Listen carefully. We have your granddaughter. She is not hurt. You will send five thousand dollars today. Do not call the police. I will call back in ten minutes. Have the money ready."
+        }
+      ],
+      "filter": "highpass=f=300,lowpass=f=3400,acompressor=threshold=-18dB:ratio=3,volume=1.4"
+    },
+    {
+      "id": "M3",
+      "for": "S10",
+      "title": "Voicemail: 'Your computer has a virus'",
+      "target_seconds": "about 25",
+      "segments": [
+        {
+          "speaker": "Caller (man, polite, slightly robotic)",
+          "voice": "am_echo",
+          "speed": 0.95,
+          "text": "Hello, this is Daniel from the Windows Technical Department. Our servers show your computer is sending error messages and has a dangerous virus. If it is not fixed today, your files and banking information may be lost. Please call us back right away at 1-888-555-0132 so a technician can connect to your computer. Again, 1-888-555-0132."
+        }
+      ],
+      "filter": "highpass=f=300,lowpass=f=3200,aecho=0.8:0.6:6:0.25,acompressor=threshold=-18dB:ratio=3,volume=1.4"
+    },
+    {
+      "id": "M4",
+      "for": "S11",
+      "title": "Call recording: 'I got arrested'",
+      "target_seconds": "about 25",
+      "segments": [
+        {
+          "speaker": "Grandson (young man, upset, a little muffled)",
+          "voice": "am_liam",
+          "speed": 0.98,
+          "text": "Hi Grandma, it's me... I'm so sorry. I got pulled over and they found something in my friend's car, and now I'm under arrest. I'm okay, but I need bail money today. My lawyer, Mr. Harris, is going to call you. Please do what he says. And please don't tell Mom. I love you."
+        }
+      ],
+      "filter": "highpass=f=350,lowpass=f=2600,acompressor=threshold=-18dB:ratio=3,volume=1.5"
+    },
+    {
+      "id": "M5",
+      "for": "S12",
+      "title": "Call recording: 'I was in a car accident'",
+      "target_seconds": "about 25",
+      "segments": [
+        {
+          "speaker": "Grandson (same voice as M4, shaken, a little muffled)",
+          "voice": "am_liam",
+          "speed": 0.98,
+          "text": "Grandpa? It's me. I was in a car accident. I'm okay, I just cut my lip, so I sound weird. The other driver got hurt and the police say I have to pay for the damage or I go to jail. A lawyer, Mr. Cole, is going to call you. Please don't tell Dad. I'm really scared."
+        }
+      ],
+      "filter": "highpass=f=350,lowpass=f=2600,acompressor=threshold=-18dB:ratio=3,volume=1.5"
+    }
+  ]
+}

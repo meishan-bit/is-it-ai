@@ -1,0 +1,151 @@
+{
+  "terms": [
+    {
+      "slug": "ai",
+      "term": "Artificial intelligence (AI)",
+      "definition": "Computer programs that can write, talk and make pictures that seem made by a person.",
+      "example": "RCMP in Alberta warn that scammers now use AI to copy voices, make fake videos and run chatbots that keep a fake romance going.",
+      "example_sources": [
+        {
+          "label": "Oyen Echo (RCMP)",
+          "url": "https://www.oyenecho.com/articles/rcmp-warns-public-to-watch-for-rise-of-ai-powered-scams"
+        }
+      ],
+      "what_to_do": "Judge a message by what it asks you to do, not by how real it looks or sounds. If it wants money, secrecy or speed, check first.",
+      "practice_items": [
+        "ALL"
+      ]
+    },
+    {
+      "slug": "deepfake",
+      "term": "Deepfake",
+      "definition": "A fake video, photo or recording made by AI to look or sound like a real person.",
+      "example": "Deepfake videos of Prime Minister Mark Carney have been used in online ads to push fake investment platforms.",
+      "example_sources": [
+        {
+          "label": "Toronto Guardian",
+          "url": "https://torontoguardian.com/?p=117722"
+        }
+      ],
+      "what_to_do": "Don't trust an investment ad because a famous face is in it. Check the firm at aretheyregistered.ca before you send any money.",
+      "practice_items": [
+        "S07",
+        "S17",
+        "S18"
+      ]
+    },
+    {
+      "slug": "voice-clone",
+      "term": "Voice clone",
+      "definition": "A copy of someone's voice made by AI from a short recording, used to say things they never said.",
+      "example": "Canadians lost nearly $3 million to family-emergency scams in 2024, some using cloned voices. A 2024 survey found 27% of Canadians had received a deepfake scam call.",
+      "example_sources": [
+        {
+          "label": "Money.ca",
+          "url": "https://money.ca/news/ai-voice-cloning-scam-son-mom"
+        },
+        {
+          "label": "TELUS Wise",
+          "url": "https://www.telus.com/en/wise/resources/content/article/who-is-really-calling-the-rise-of-ai-voice-cloning-scams"
+        }
+      ],
+      "what_to_do": "Hang up and call the person back on a number you already have. Think about a family code word that only you know.",
+      "practice_items": [
+        "S01",
+        "S08",
+        "S11",
+        "S12"
+      ]
+    },
+    {
+      "slug": "phishing",
+      "term": "Phishing (and smishing)",
+      "definition": "A message pretending to be from someone you trust, to get your money or personal details. Smishing is the text-message version.",
+      "example": "Fake CRA texts say a tax refund is waiting as an Interac e-Transfer. The CRA does not send refunds that way.",
+      "example_sources": [
+        {
+          "label": "CRA: Recognize a scam",
+          "url": "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam"
+        }
+      ],
+      "what_to_do": "Don't tap links in surprise messages. Go to the real website by typing the address yourself, or use the organization's app.",
+      "practice_items": [
+        "S03",
+        "S06",
+        "S13",
+        "S14"
+      ]
+    },
+    {
+      "slug": "spoofing",
+      "term": "Spoofing",
+      "definition": "Faking the name or number that shows on your phone, so a call looks like it comes from your bank or the police.",
+      "example": "In \"bank investigator\" scams, callers pose as bank staff and ask you to help catch a dishonest employee. Canadians lost over $28 million this way in 2025.",
+      "example_sources": [
+        {
+          "label": "Napanee Today",
+          "url": "https://www.napaneetoday.ca/?p=98810"
+        }
+      ],
+      "what_to_do": "Don't trust the name on the screen. Hang up and call the number on the back of your bank card.",
+      "practice_items": [
+        "S02",
+        "S05"
+      ]
+    },
+    {
+      "slug": "tech-support-scam",
+      "term": "Tech-support scam",
+      "definition": "A fake warning that your computer has a problem, so you call a \"helper\" who takes your money or controls your computer.",
+      "example": "Fake pop-ups lock the screen and show a number to call. Microsoft says its real warnings never include a phone number.",
+      "example_sources": [
+        {
+          "label": "Microsoft: Protect yourself from tech support scams",
+          "url": "https://support.microsoft.com/en-us/windows/protect-yourself-from-tech-support-scams-2ebf91bd-f94c-2a8a-e541-f5c800d18435"
+        }
+      ],
+      "what_to_do": "Never call the number on a pop-up. Close the browser, or restart the device if it won't close.",
+      "practice_items": [
+        "S10",
+        "S15",
+        "S16"
+      ]
+    },
+    {
+      "slug": "grandparent-scam",
+      "term": "Grandparent (emergency) scam",
+      "definition": "A call or message pretending a family member is in trouble and needs money fast.",
+      "example": "Police in Newfoundland and Labrador warned in June 2025 of calls where a \"grandchild\" needs bail and a courier comes to collect the cash.",
+      "example_sources": [
+        {
+          "label": "RCMP NL",
+          "url": "https://rcmp.ca/en/nl/news/2025/06/rcmp-nl-warns-public-grandparent-scam-current-circulation"
+        }
+      ],
+      "what_to_do": "Hang up and call your grandchild or their parents. Police and lawyers never send a courier to pick up bail money.",
+      "practice_items": [
+        "S01",
+        "S11",
+        "S12"
+      ]
+    },
+    {
+      "slug": "remote-access",
+      "term": "Remote access",
+      "definition": "Letting someone control your computer or phone from far away. Only allow it for help you asked for.",
+      "example": "Fake support callers ask you to install a program so they can \"fix\" a virus, then take money or personal details.",
+      "example_sources": [
+        {
+          "label": "Microsoft: Protect yourself from tech support scams",
+          "url": "https://support.microsoft.com/en-us/windows/protect-yourself-from-tech-support-scams-2ebf91bd-f94c-2a8a-e541-f5c800d18435"
+        }
+      ],
+      "what_to_do": "Only give access to someone you contacted yourself. If a stranger got in, turn off the internet, call your bank, and get the device checked.",
+      "practice_items": [
+        "S10",
+        "S15",
+        "S16"
+      ]
+    }
+  ]
+}
