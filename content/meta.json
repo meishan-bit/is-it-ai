@@ -1,0 +1,12 @@
+{
+  "content_version": "1.0.0",
+  "updated": "2026-11-14",
+  "notes": "Bump content_version when any file in /content changes (patch = typo, minor = new or changed item, major = test forms change). Test-form changes invalidate comparisons with earlier results.",
+  "history": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-14",
+      "summary": "First full set: S01-S20, 8 glossary terms, 10 tactic guides. Built from Week 1 and Week 2 content packs."
+    }
+  ]
+}

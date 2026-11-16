@@ -1,0 +1,1433 @@
+{
+  "scenarios": [
+    {
+      "id": "S01",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T1",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "Unknown number (613) 555-0148",
+      "message": [
+        "Grandma it's me, Jake. I broke my phone so I'm using my friend's. I'm in trouble and I really need your help today.",
+        "I need $2,500 for a lawyer by 3 pm. A courier can pick up the cash at your house. Please don't tell Mom and Dad."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "I broke my phone so I'm using my friend's",
+        "by 3 pm",
+        "A courier can pick up the cash at your house",
+        "Please don't tell Mom and Dad"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A new number, a rush, and a request to keep it secret",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The message has a spelling mistake",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It was sent in the afternoon",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Call Jake or his parents on the number you already have",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Call the new number to check that it's his voice",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Get the cash ready in case it's real",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. A new number, a family emergency, a secret and cash picked up at your door are warning signs. Police and lawyers never send a courier for bail. Hearing his voice won't prove it: AI can copy a voice from a short video. Call Jake or his parents on the number you already have.",
+      "source_labels": [
+        "Kingston Police",
+        "RCMP NL"
+      ],
+      "source_urls": [
+        "https://www.kingstonpolice.ca/news/posts/police-see-recent-increase-in-reports-of-grandparent-scam/",
+        "https://rcmp.ca/en/nl/news/2025/06/rcmp-nl-warns-public-grandparent-scam-current-circulation"
+      ]
+    },
+    {
+      "id": "S02",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T2",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "MapleTrust Bank",
+      "message": [
+        "MapleTrust Fraud Dept: We blocked a $1,940.00 purchase on your card. An investigator will call you today. Please keep this confidential. We believe an employee at your branch is involved."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "An investigator will call you today",
+        "Please keep this confidential",
+        "We believe an employee at your branch is involved"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It asks you to keep a bank matter secret and help with an investigation",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It shows the bank's name",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The amount has cents in it",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Call the number on the back of your bank card",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Wait for the investigator's call and follow their steps",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Go to your branch and withdraw cash to keep it safe",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Banks never ask customers to help investigate staff or keep things secret. The name shown on a text or call can be faked. Fake investigators often ask you to withdraw cash or buy gift cards. Call the number on the back of your card instead.",
+      "source_labels": [
+        "Edmonton Police",
+        "Napanee Today"
+      ],
+      "source_urls": [
+        "https://www.edmontonpolice.ca/News/MediaReleases/ATIfraudsuspectsFeb25",
+        "https://www.napaneetoday.ca/?p=98810"
+      ]
+    },
+    {
+      "id": "S03",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T4",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "+1 (204) 555-0193",
+      "message": [
+        "Canada Post: Your parcel is held at our depot due to an unpaid shipping fee of $1.99. Pay within 24 hours or it will be returned: cpost-delivery-fee.com"
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "unpaid shipping fee of $1.99",
+        "Pay within 24 hours",
+        "cpost-delivery-fee.com"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A small fee, a deadline and a link to pay",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It mentions Canada Post",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The fee is under $2",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Delete it, and track parcels in the store's own website or app",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Pay the $1.99, since it's only a small amount",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Reply to ask which parcel it is",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Canada Post says a text asking you to click a link to pay a held-parcel fee is not from them. The small fee is bait to get your card number. If you are waiting for a parcel, check it on the store's website or app where you ordered it.",
+      "source_labels": [
+        "Canada Post"
+      ],
+      "source_urls": [
+        "https://www.canadapost-postescanada.ca/cpc/en/support/kb/company-policies/privacy-security/what-do-to-if-you-get-suspicious-email.page"
+      ]
+    },
+    {
+      "id": "S04",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "real",
+      "format": "text",
+      "verdict": "real",
+      "sender_label": "Riverside Pharmacy",
+      "message": [
+        "Riverside Pharmacy: Your prescription is ready for pickup at our Bank St. location. Questions? Call the pharmacy. Reply STOP to opt out."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "Questions? Call the pharmacy.",
+        "Reply STOP to opt out."
+      ],
+      "sign_question": {
+        "prompt": "What makes this look safe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No link, no payment and no rush",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It says \"please\" and \"thank you\"",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It comes from a business",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pick it up as usual, or call the pharmacy number you already know if unsure",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Reply with your health card number to confirm",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ignore it, since all texts are scams",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This one is likely real. It asks for nothing: no link, no money, no personal details and no deadline. If you're ever unsure, call the pharmacy on the number you already use. Not every message is a scam; the warning signs are what matter.",
+      "source_labels": [],
+      "source_urls": []
+    },
+    {
+      "id": "S05",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T10",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "CAFC Recovery Unit",
+      "message": [
+        "Canadian Anti-Fraud Centre: Our records show you lost money to an online scam. We have recovered $8,450 of your funds. To release them, confirm your banking details and pay a $250 processing fee by Interac e-Transfer."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "confirm your banking details",
+        "pay a $250 processing fee by Interac e-Transfer"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You have to pay a fee to get money back",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It names a government agency",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The amount is very exact",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't reply; check with the CAFC at 1-888-495-8501 or on its official website",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Pay the fee, since you'll get $8,450 back",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Send your banking details but not the fee",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. The real Canadian Anti-Fraud Centre never contacts people to ask for money. Scammers often target people who have already lost money, promising to get it back. If you're unsure, call the CAFC at 1-888-495-8501 using the number from its official website.",
+      "source_labels": [
+        "CAFC"
+      ],
+      "source_urls": [
+        "https://www.antifraudcentre-centreantifraude.ca/index-eng.htm"
+      ]
+    },
+    {
+      "id": "S06",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T5",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "+1 (416) 555-0121",
+      "message": [
+        "Toll Services Notice: You have an unpaid toll balance of $6.85. To avoid a $50 late fee and a hold on your license renewal, pay within 24 hours: tollpay-canada-services.com"
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "avoid a $50 late fee and a hold on your license renewal",
+        "pay within 24 hours",
+        "tollpay-canada-services.com"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A threat, a 24-hour deadline and a link to pay",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The amount is small",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It mentions your license",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Delete it. If you use a toll road, sign in to your account by typing the address yourself",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Pay the $6.85 to be safe",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Reply to ask which trip it was for",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Fake toll texts use a small fee, a threat and a short deadline to rush you into clicking. Never pay from a text link. If you use a toll road, check your account by typing the website yourself or calling the number on your bill.",
+      "source_labels": [
+        "Insauga (407 ETR)",
+        "Stratford Today"
+      ],
+      "source_urls": [
+        "https://www.insauga.com/highway-407-scam-targeting-people-in-ontario/",
+        "https://stratfordtoday.ca/local-news/new-scam-text-claiming-unsettled-etr-violation-10365080"
+      ]
+    },
+    {
+      "id": "S07",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T8",
+      "format": "text_image",
+      "verdict": "scam",
+      "sender_label": "Richard, GoldenYears Match chat",
+      "message": [
+        "Good morning, my dear Linda. I dreamed of our walk by the sea again.",
+        "I wish we could video chat, but the camera on the boat is broken and the internet here is so weak.",
+        "I have bad news. My bank card is frozen and I need $3,000 to pay my crew before we reach port. I will pay you back the day I land. You are the only one I trust."
+      ],
+      "media_id": "M1",
+      "media_kind": "image",
+      "media_url": "/media/images/m1.jpg",
+      "alt_text": "Profile photo of a smiling man in his 60s with silver hair and a navy sweater, on a sailboat at sunset. The lighting looks almost too perfect.",
+      "transcript": null,
+      "caption": null,
+      "ai_generated": true,
+      "highlights": [
+        "I wish we could video chat, but the camera on the boat is broken",
+        "I need $3,000 to pay my crew",
+        "You are the only one I trust"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He never video chats and suddenly needs money",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "His photo looks professional",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "He writes very kindly",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't send money; talk to someone you trust and report the profile",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Send part of the money to help",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Send the money if he agrees to a video call first",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Someone you've never met in person, who always has an excuse not to video chat, now needs money. His photo may be made by AI, so a photo search may not find it. Never send money to someone you haven't met. Talk to someone you trust first.",
+      "source_labels": [
+        "Oyen Echo (RCMP)",
+        "CAFC Frauds A-Z"
+      ],
+      "source_urls": [
+        "https://www.oyenecho.com/articles/rcmp-warns-public-to-watch-for-rise-of-ai-powered-scams",
+        "https://antifraudcentre-centreantifraude.ca/scams-fraudes/azindex-eng.htm"
+      ],
+      "notes": "Week 2 text said 'camera on the oil rig'. Changed to 'boat' to match the sailboat photo (M1). Revert in content if the team prefers."
+    },
+    {
+      "id": "S08",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T9",
+      "format": "audio",
+      "verdict": "scam",
+      "sender_label": "Voicemail from Unknown number (416) 555-0186",
+      "message": [],
+      "media_id": "M2",
+      "media_kind": "audio",
+      "media_url": "/media/audio/m2.mp3",
+      "alt_text": null,
+      "transcript": "A young woman is crying: \"Grandpa? Grandpa, it's me, it's Emily. Please, I'm in really big trouble, they won't let me go...\" Then a calm man: \"Listen carefully. We have your granddaughter. She is not hurt. You will send five thousand dollars today. Do not call the police. I will call back in ten minutes. Have the money ready.\"",
+      "caption": null,
+      "ai_generated": true,
+      "highlights": [
+        "We have your granddaughter",
+        "You will send five thousand dollars today",
+        "Do not call the police"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Threats, \"don't call the police\" and a demand for money today",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The man sounds calm",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The call came from a local area code",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't call back. Call Emily or her parents on the number you already have; if you can't reach her, call 911",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Call back and ask to speak to Emily",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Get the money ready while you wait",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. AI can copy a loved one's voice from a short video online. Threats, \"don't call the police\" and a demand for money now are warning signs. Call Emily or her parents on the number you already have. If you can't reach her and you're worried, call 911.",
+      "source_labels": [
+        "NetNewsLedger",
+        "Oyen Echo (RCMP)"
+      ],
+      "source_urls": [
+        "https://www.netnewsledger.com/?p=209510",
+        "https://www.oyenecho.com/articles/rcmp-warns-public-to-watch-for-rise-of-ai-powered-scams"
+      ]
+    },
+    {
+      "id": "S09",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "real",
+      "format": "text",
+      "verdict": "real",
+      "sender_label": "Jake (grandson), saved contact",
+      "message": [
+        "Hi Grandma! Thanks for the birthday card, the hockey socks are perfect. Still on for Sunday dinner? Mom says we'll come by around 5."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "Still on for Sunday dinner?"
+      ],
+      "sign_question": {
+        "prompt": "What makes this look safe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's from Jake's saved number and asks for nothing",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It is friendly",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It mentions his mom",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reply as you normally would",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Block the number in case it's AI",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ask him to send his birthday to prove it's him",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This one is likely real. It comes from Jake's saved number, talks about real family plans, and asks for no money, secrecy or rush. It's fine to reply. If a known contact ever asks for money or secrecy, call them to check first.",
+      "source_labels": [],
+      "source_urls": []
+    },
+    {
+      "id": "S10",
+      "use": "practice",
+      "pair_id": null,
+      "form": null,
+      "tactic": "T6",
+      "format": "audio",
+      "verdict": "scam",
+      "sender_label": "Voicemail from +1 (888) 555-0132",
+      "message": [],
+      "media_id": "M3",
+      "media_kind": "audio",
+      "media_url": "/media/audio/m3.mp3",
+      "alt_text": null,
+      "transcript": "A polite man says: \"Hello, this is Daniel from the Windows Technical Department. Our servers show your computer is sending error messages and has a dangerous virus. If it is not fixed today, your files and banking information may be lost. Please call us back right away at 1-888-555-0132 so a technician can connect to your computer. Again, 1-888-555-0132.\"",
+      "caption": null,
+      "ai_generated": true,
+      "highlights": [
+        "has a dangerous virus",
+        "If it is not fixed today",
+        "so a technician can connect to your computer"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A surprise call about a virus, asking you to let them connect to your computer",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The caller gives his name",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The number is toll-free",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Delete it and don't call back. If your computer seems wrong, ask someone you trust or a local repair shop",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Call back to ask questions first",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Let them connect, but watch the screen",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Microsoft and other tech companies don't call you about viruses. The caller wants control of your computer or payment for fake repairs. Delete the message and don't call back. If your computer seems wrong, ask someone you trust or a local repair shop.",
+      "source_labels": [
+        "Microsoft: Protect yourself from tech support scams",
+        "Q101 / BC Crime Stoppers"
+      ],
+      "source_urls": [
+        "https://support.microsoft.com/en-us/windows/protect-yourself-from-tech-support-scams-2ebf91bd-f94c-2a8a-e541-f5c800d18435",
+        "https://q101.ca/?p=29347"
+      ]
+    },
+    {
+      "id": "S11",
+      "use": "pre",
+      "pair_id": "P1",
+      "form": "A",
+      "tactic": "T1",
+      "format": "audio",
+      "verdict": "scam",
+      "sender_label": "Call from Unknown number (905) 555-0157 (recording)",
+      "message": [],
+      "media_id": "M4",
+      "media_kind": "audio",
+      "media_url": "/media/audio/m4.mp3",
+      "alt_text": null,
+      "transcript": "You answer the phone and hear your grandson, a little muffled: \"Hi Grandma, it's me... I'm so sorry. I got pulled over and they found something in my friend's car, and now I'm under arrest. I'm okay, but I need bail money today. My lawyer, Mr. Harris, is going to call you. Please do what he says. And please don't tell Mom. I love you.\"",
+      "caption": null,
+      "ai_generated": true,
+      "highlights": [
+        "I need bail money today",
+        "My lawyer, Mr. Harris, is going to call you",
+        "please don't tell Mom"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A new number, bail money today and \"don't tell Mom\"",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "He sounds upset",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "He says \"I love you\"",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hang up and call your grandson or his parents on the number you already have",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Wait for the lawyer's call and follow his steps",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ask a question only he would know, and help if he gets it right",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. AI can copy a grandchild's voice from a short video online. An arrest, bail money today, a \"lawyer\" who will call and a secret are warning signs. Police never collect bail by courier. Hang up and call your grandson or his parents on a number you already have.",
+      "source_labels": [
+        "Kingston Police",
+        "RCMP NL",
+        "Money.ca"
+      ],
+      "source_urls": [
+        "https://www.kingstonpolice.ca/news/posts/police-see-recent-increase-in-reports-of-grandparent-scam/",
+        "https://rcmp.ca/en/nl/news/2025/06/rcmp-nl-warns-public-grandparent-scam-current-circulation",
+        "https://money.ca/news/ai-voice-cloning-scam-son-mom"
+      ]
+    },
+    {
+      "id": "S12",
+      "use": "post",
+      "pair_id": "P1",
+      "form": "B",
+      "tactic": "T1",
+      "format": "audio",
+      "verdict": "scam",
+      "sender_label": "Call from Unknown number (905) 555-0163 (recording)",
+      "message": [],
+      "media_id": "M5",
+      "media_kind": "audio",
+      "media_url": "/media/audio/m5.mp3",
+      "alt_text": null,
+      "transcript": "You answer the phone and hear your grandson, a little muffled: \"Grandpa? It's me. I was in a car accident. I'm okay, I just cut my lip, so I sound weird. The other driver got hurt and the police say I have to pay for the damage or I go to jail. A lawyer, Mr. Cole, is going to call you. Please don't tell Dad. I'm really scared.\"",
+      "caption": null,
+      "ai_generated": true,
+      "highlights": [
+        "I have to pay for the damage or I go to jail",
+        "A lawyer, Mr. Cole, is going to call you",
+        "Please don't tell Dad"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A new number, money to stay out of jail and \"don't tell Dad\"",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "He says he cut his lip",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "He sounds scared",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hang up and call your grandson or his parents on the number you already have",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Wait for the lawyer's call and follow his steps",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ask a question only he would know, and help if he gets it right",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. AI can copy a grandchild's voice, and \"I cut my lip\" explains why it sounds a bit off. An accident, money to avoid jail, a \"lawyer\" who will call and a secret are warning signs. Hang up and call your grandson or his parents on a number you already have.",
+      "source_labels": [
+        "Kingston Police",
+        "RCMP NL",
+        "Money.ca"
+      ],
+      "source_urls": [
+        "https://www.kingstonpolice.ca/news/posts/police-see-recent-increase-in-reports-of-grandparent-scam/",
+        "https://rcmp.ca/en/nl/news/2025/06/rcmp-nl-warns-public-grandparent-scam-current-circulation",
+        "https://money.ca/news/ai-voice-cloning-scam-son-mom"
+      ]
+    },
+    {
+      "id": "S13",
+      "use": "pre",
+      "pair_id": "P2",
+      "form": "A",
+      "tactic": "T3",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "+1 (613) 555-0109",
+      "message": [
+        "CRA: You have received an Interac e-Transfer of $437.85 for your 2025 tax refund. Accept your deposit before Nov 30: cra-refund-deposit.ca"
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "Interac e-Transfer of $437.85 for your 2025 tax refund",
+        "Accept your deposit before Nov 30",
+        "cra-refund-deposit.ca"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A tax refund sent by e-transfer, with a link and a deadline",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It names the CRA",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The amount has cents in it",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't click. Check your refund in CRA My Account by typing canada.ca yourself",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Click the link just to look",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Reply to ask if it's real",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. The CRA does not send refunds by Interac e-Transfer or by a text with a link. Real refunds come by direct deposit or cheque. Don't click. To check a refund, sign in to CRA My Account by typing canada.ca yourself.",
+      "source_labels": [
+        "CRA: Recognize a scam",
+        "CRA scam alerts"
+      ],
+      "source_urls": [
+        "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam",
+        "https://www.canada.ca/en/revenue-agency/corporate/security/protect-yourself-against-fraud/scam-alerts.html"
+      ]
+    },
+    {
+      "id": "S14",
+      "use": "post",
+      "pair_id": "P2",
+      "form": "B",
+      "tactic": "T3",
+      "format": "text",
+      "verdict": "scam",
+      "sender_label": "+1 (613) 555-0114",
+      "message": [
+        "Government of Canada: You qualify for the 2026 Seniors Grocery Benefit of $528. Apply by Nov 30 to receive your payment: canada-benefits-apply.ca. Have your SIN and banking details ready."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "Apply by Nov 30 to receive your payment",
+        "canada-benefits-apply.ca",
+        "Have your SIN and banking details ready"
+      ],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A text link asking for your SIN and banking details, with a deadline",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It names the Government of Canada",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The benefit has a specific amount",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't click. Look up any benefit by typing canada.ca yourself or calling Service Canada",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Apply quickly before the deadline",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Reply to ask for more details",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. The government does not text you a link asking for your SIN and banking details. Scammers invent benefits that sound real, often near tax time. Don't click. Check any benefit by typing canada.ca yourself or by calling Service Canada.",
+      "source_labels": [
+        "CRA scam alerts",
+        "CRA: Recognize a scam"
+      ],
+      "source_urls": [
+        "https://www.canada.ca/en/revenue-agency/corporate/security/protect-yourself-against-fraud/scam-alerts.html",
+        "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam"
+      ]
+    },
+    {
+      "id": "S15",
+      "use": "pre",
+      "pair_id": "P3",
+      "form": "A",
+      "tactic": "T6",
+      "format": "image",
+      "verdict": "scam",
+      "sender_label": "Pop-up on your laptop while reading a news website",
+      "message": [],
+      "media_id": "M6",
+      "media_kind": "image",
+      "media_url": "/media/images/m6.jpg",
+      "alt_text": "A red and white warning fills the whole screen. It says \"Microsoft Security Alert. Your computer has been BLOCKED. Trojan spyware detected. Your passwords, photos and banking details are at risk. Do not restart or shut down your computer. Call Microsoft Support now: 1-888-555-0177.\" A timer counts down from 4:59. Buttons say \"Call now\" and \"Scan now\".",
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An alarm screen with a phone number to call and a countdown",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It uses the name Microsoft",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It shows an error message",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Close the browser, or restart the computer if it won't close. Never call the number",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Call the number to ask if it's real",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Click \"Scan now\"",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Real Microsoft warnings never include a phone number. The alarm, the countdown and \"do not restart\" are there to scare you into calling. Close the browser. If it won't close, restart the computer. Your computer is most likely fine.",
+      "source_labels": [
+        "Microsoft: Protect yourself from tech support scams",
+        "Q101 / BC Crime Stoppers"
+      ],
+      "source_urls": [
+        "https://support.microsoft.com/en-us/windows/protect-yourself-from-tech-support-scams-2ebf91bd-f94c-2a8a-e541-f5c800d18435",
+        "https://q101.ca/?p=29347"
+      ]
+    },
+    {
+      "id": "S16",
+      "use": "post",
+      "pair_id": "P3",
+      "form": "B",
+      "tactic": "T6",
+      "format": "image",
+      "verdict": "scam",
+      "sender_label": "Pop-up on your iPhone while reading a recipe website",
+      "message": [],
+      "media_id": "M7",
+      "media_kind": "image",
+      "media_url": "/media/images/m7.jpg",
+      "alt_text": "A warning fills the whole phone screen. It says \"Apple Security Alert. Your iPhone has been hacked. 3 viruses detected. Your Apple ID and photos may be stolen. Do not close this page. Call Apple Support immediately: 1-877-555-0164.\" A timer counts down from 4:59. Buttons say \"Call now\" and \"Scan now\".",
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An alarm screen with a phone number to call and a countdown",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It uses the name Apple",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It says how many viruses",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Close the browser tab, or restart the phone if it won't close. Never call the number",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Call the number to ask if it's real",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Tap \"Scan now\"",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. Apple does not send pop-ups telling you to call a phone number. The alarm, the countdown and \"do not close\" are there to scare you into calling. Close the tab. If it won't close, restart the phone. Your phone is most likely fine.",
+      "source_labels": [
+        "Malwarebytes (Aug 2026)",
+        "Q101 / BC Crime Stoppers"
+      ],
+      "source_urls": [
+        "https://www.malwarebytes.com/blog/scams/2026/08/fake-apple-pay-charge-brings-the-classic-tech-support-scam-to-your-phone",
+        "https://q101.ca/?p=29347"
+      ],
+      "media_orientation": "portrait"
+    },
+    {
+      "id": "S17",
+      "use": "pre",
+      "pair_id": "P4",
+      "form": "A",
+      "tactic": "T7",
+      "format": "image",
+      "verdict": "scam",
+      "sender_label": "Sponsored video ad in your social media feed",
+      "message": [],
+      "media_id": "M8",
+      "media_kind": "image",
+      "media_url": "/media/images/m8.jpg",
+      "alt_text": "A still from a video interview. Margaret Ellison, a well-known TV business host, sits in a studio. Her skin and teeth look a little too smooth.",
+      "transcript": null,
+      "caption": "Margaret Ellison: \"This government-backed platform turned my $350 into $9,200 in one month.\" Spots limited. Register today: maplewealth-ai.com",
+      "ai_generated": true,
+      "highlights": [],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A famous person promising huge, quick returns on a \"government-backed\" platform",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "She is in a TV studio",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The ad has a caption",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't click. Check the firm at aretheyregistered.ca and any program on canada.ca",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Click to read more before deciding",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Start with $350 to test it",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. AI can make a video of a famous person saying anything. Huge returns, \"government-backed\" and a small first deposit are warning signs. Don't click. Check any investment firm at aretheyregistered.ca, and any government program on canada.ca.",
+      "source_labels": [
+        "Toronto Guardian",
+        "CSA: Are they registered?"
+      ],
+      "source_urls": [
+        "https://torontoguardian.com/?p=117722",
+        "https://www.securities-administrators.ca/?p=83"
+      ]
+    },
+    {
+      "id": "S18",
+      "use": "post",
+      "pair_id": "P4",
+      "form": "B",
+      "tactic": "T7",
+      "format": "image",
+      "verdict": "scam",
+      "sender_label": "Sponsored video ad in your social media feed",
+      "message": [],
+      "media_id": "M9",
+      "media_kind": "image",
+      "media_url": "/media/images/m9.jpg",
+      "alt_text": "A still from a video of Dr. Paul Renaud, a well-known economist, speaking at an outdoor podium. His mouth looks stiff and the edge of his hair is blurry.",
+      "transcript": null,
+      "caption": "Economist Dr. Paul Renaud reveals the new federal program banks don't want you to know about. Start with $250, earn up to $1,500 a week. Guaranteed. Limited spots: northstar-invest-ca.com",
+      "ai_generated": true,
+      "highlights": [],
+      "sign_question": {
+        "prompt": "What is the biggest warning sign?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A famous person promising guaranteed returns from a \"federal program\"",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "He is speaking at a podium",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "He is called an economist",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Don't click. Check the firm at aretheyregistered.ca and any program on canada.ca",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Click to read more before deciding",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Start with $250 to test it",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This is a scam. AI can make a video of a famous person saying anything. \"Guaranteed\" returns, a \"secret\" federal program and a small first deposit are warning signs. Don't click. Check any investment firm at aretheyregistered.ca, and any government program on canada.ca.",
+      "source_labels": [
+        "Toronto Guardian",
+        "CSA: Are they registered?"
+      ],
+      "source_urls": [
+        "https://torontoguardian.com/?p=117722",
+        "https://www.securities-administrators.ca/?p=83"
+      ]
+    },
+    {
+      "id": "S19",
+      "use": "pre",
+      "pair_id": "P5",
+      "form": "A",
+      "tactic": "real",
+      "format": "text",
+      "verdict": "real",
+      "sender_label": "MapleTrust Bank",
+      "message": [
+        "MapleTrust Bank: Did you make a purchase of $412.50 at Northgate Hardware on Nov 10? Reply YES or NO. We will never ask for your PIN, password or a code by text. If unsure, call the number on the back of your card."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "Reply YES or NO.",
+        "We will never ask for your PIN, password or a code by text.",
+        "call the number on the back of your card"
+      ],
+      "sign_question": {
+        "prompt": "What makes this look safe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No link, it asks only YES or NO, and it points you to the number on your own card",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It shows the bank's name",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It gives the exact store and amount",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reply YES or NO, or call the number on the back of your card",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Reply with your card number to confirm",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ignore it, because banks never text",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This one is likely real. It has no link, asks only YES or NO, and sends you to the number on your own card. It never asks for a PIN, password or code. If you're unsure, calling the number on the back of your card is always safe.",
+      "source_labels": [
+        "Edmonton Police"
+      ],
+      "source_urls": [
+        "https://www.edmontonpolice.ca/News/MediaReleases/ATIfraudsuspectsFeb25"
+      ]
+    },
+    {
+      "id": "S20",
+      "use": "post",
+      "pair_id": "P5",
+      "form": "B",
+      "tactic": "real",
+      "format": "text",
+      "verdict": "real",
+      "sender_label": "Bayview Family Dental",
+      "message": [
+        "Bayview Family Dental: Reminder of your cleaning with Dr. Patel on Tue Nov 18 at 10:30 am. Reply C to confirm, or call our office to reschedule. Reply STOP to opt out."
+      ],
+      "media_id": null,
+      "media_kind": null,
+      "media_url": null,
+      "alt_text": null,
+      "transcript": null,
+      "caption": null,
+      "ai_generated": false,
+      "highlights": [
+        "Reply C to confirm, or call our office to reschedule.",
+        "Reply STOP to opt out."
+      ],
+      "sign_question": {
+        "prompt": "What makes this look safe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No link, no payment and no personal details asked for",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It names the dentist",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "It says \"Reminder\"",
+            "correct": false
+          }
+        ]
+      },
+      "step_question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reply C, or call the office number you already have",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Reply with your health card number to confirm",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ignore it, because all texts are scams",
+            "correct": false
+          }
+        ]
+      },
+      "explanation": "This one is likely real. It asks only for a one-letter reply, has no link and wants no money or personal details. If you're ever unsure, call the dental office on the number you already use. Not every message is a scam; the warning signs are what matter.",
+      "source_labels": [],
+      "source_urls": []
+    }
+  ]
+}
