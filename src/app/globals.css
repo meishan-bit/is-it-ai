@@ -169,10 +169,16 @@ input[type='text'], input[type='password'], select {
 .tactic summary::-webkit-details-marker { display: none; }
 .tactic[open] summary { border-bottom: 2px solid var(--line); }
 .tactic .body { padding: 14px 18px; }
-.chip { font-size: 0.95rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; border: 2px solid var(--blue); background: #fff; color: var(--blue-dark); white-space: nowrap; }
-.chip.strong { background: var(--blue); color: #fff; }
-.chip.soft { background: var(--blue-soft); }
-.chip.try { background: var(--try-bg); color: var(--try-ink); border-color: var(--try-line); }
+/* Status labels are plain text, not pills, so only tappable things have borders (fix #7). */
+.chip { font-size: 1.125rem; font-weight: 700; color: var(--blue-dark); white-space: nowrap; margin-left: auto; }
+.chip.strong { color: var(--blue-dark); }
+.chip.soft { color: var(--ink-soft); font-weight: 400; }
+.chip.try { color: var(--try-ink); }
+.tactic summary::after {
+  content: ''; flex: none; width: 0.55em; height: 0.55em; margin-left: 4px;
+  border-right: 4px solid var(--blue); border-bottom: 4px solid var(--blue); transform: rotate(-45deg);
+}
+.tactic[open] summary::after { transform: rotate(45deg); }
 ul.flags { margin: 0 0 12px; padding-left: 1.2em; }
 ul.flags li { margin-bottom: 4px; }
 .rules { counter-reset: r; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }

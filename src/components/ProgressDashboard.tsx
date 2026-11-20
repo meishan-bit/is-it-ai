@@ -52,8 +52,8 @@ export default function ProgressDashboard() {
         </div>
       ) : (
         <div className="stat-grid">
-          <div className="stat"><div className="num">{done.length}</div><div className="lbl">rounds finished</div></div>
-          <div className="stat"><div className="num">{responses.length}</div><div className="lbl">examples practised</div></div>
+          <div className="stat"><div className="num">{done.length}</div><div className="lbl">{done.length === 1 ? 'round' : 'rounds'} finished</div></div>
+          <div className="stat"><div className="num">{responses.length}</div><div className="lbl">{responses.length === 1 ? 'example' : 'examples'} practised</div></div>
           <div className="stat"><div className="num">{pct}%</div><div className="lbl">spotted and handled safely</div></div>
         </div>
       )}
