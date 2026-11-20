@@ -76,6 +76,9 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
     <>
       <p className="stepcount">
         Example {index + 1} of {total}
+        {step !== 'feedback' && (
+          <span className="q">Question {step === 'verdict' ? 1 : step === 'sign' ? 2 : 3} of 3</span>
+        )}
       </p>
       <div className="dots" aria-hidden="true">
         {Array.from({ length: total }, (_, i) => (
