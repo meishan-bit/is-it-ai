@@ -120,37 +120,41 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
           <span aria-hidden="true">{good ? '✔' : '➜'}</span>
           {bannerText}
         </div>
-        <ul className="checks">
-          <li>
-            <Mark ok={result.verdict_correct} />
-            <span>
-              <strong>Real or scam:</strong> you said “{VERDICT_LABEL[result.verdict_choice]}”.{' '}
-              {result.verdict_correct ? 'That is right.' : `This one is ${scenario.verdict === 'scam' ? 'a scam' : 'real'}.`}
-            </span>
-          </li>
-          <li>
-            <Mark ok={result.sign_correct} />
-            <span>
-              <strong>{signLabel}:</strong> {result.sign_correct ? 'you spotted it.' : correctSign.text + '.'}
-            </span>
-          </li>
-          <li>
-            <Mark ok={result.step_correct} />
-            <span>
-              <strong>Safe step:</strong> {result.step_correct ? 'you chose well.' : 'see the box below.'}
-            </span>
-          </li>
-        </ul>
-        <div className="card">
-          <h2>Why</h2>
-          <p style={{ marginBottom: 0 }}>{scenario.explanation}</p>
-        </div>
         <div className="todo">
           <h3>What to do</h3>
           <p>{correctStep.text}.</p>
         </div>
         {(scenario.highlights.length > 0) && <p className="muted">The clues are highlighted below.</p>}
-        <ScenarioView scenario={scenario} highlight transcriptOpen />
+        <ScenarioView scenario={scenario} highlight transcriptOpen hideRecording />
+        {/* Score details and "Why" fold away so the result, the safe step and the clues come first (fix #4). */}
+        <details className="sources">
+          <summary>More detail</summary>
+          <div style={{ marginTop: 14 }}>
+          <ul className="checks">
+            <li>
+              <Mark ok={result.verdict_correct} />
+              <span>
+                <strong>Real or scam:</strong> you said “{VERDICT_LABEL[result.verdict_choice]}”.{' '}
+                {result.verdict_correct ? 'That is right.' : `This one is ${scenario.verdict === 'scam' ? 'a scam' : 'real'}.`}
+              </span>
+            </li>
+            <li>
+              <Mark ok={result.sign_correct} />
+              <span>
+                <strong>{signLabel}:</strong> {result.sign_correct ? 'you spotted it.' : correctSign.text + '.'}
+              </span>
+            </li>
+            <li>
+              <Mark ok={result.step_correct} />
+              <span>
+                <strong>Safe step:</strong> {result.step_correct ? 'you chose well.' : 'see "What to do" above.'}
+              </span>
+            </li>
+          </ul>
+            <h2>Why</h2>
+            <p>{scenario.explanation}</p>
+          </div>
+        </details>
         {scenario.source_urls.length > 0 && (
           <details className="sources">
             <summary>Where this comes from</summary>
