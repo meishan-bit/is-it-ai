@@ -90,7 +90,17 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
 
   // ---------------------------------------------------------------- feedback (practice only)
   if (step === 'feedback' && result) {
+    // Three outcomes (fix #3): all right, verdict right but safe step wrong, verdict wrong.
     const good = result.verdict_correct && result.step_correct;
+    const almost = result.verdict_correct && !result.step_correct;
+    const headingText = good ? 'Well done' : almost ? 'Almost' : 'Good try';
+    const bannerText = good
+      ? 'You got it.'
+      : almost
+        ? 'You spotted it. The safe step is the part to practise.'
+        : scenario.verdict === 'scam'
+          ? 'It fools a lot of people. Here is what to look for.'
+          : 'Not every message is a scam. Here is what to look for.';
     const correctSign = scenario.sign_question.options.find((o) => o.correct)!;
     const correctStep = scenario.step_question.options.find((o) => o.correct)!;
     const Mark = ({ ok }: { ok: boolean }) => (
@@ -100,15 +110,15 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
       </>
     );
     const signLabel = scenario.verdict === 'scam' ? 'Warning sign' : 'What makes it look safe';
-    const speech = `${good ? 'Well done.' : 'Good try. Here is what to look for.'} ${scenario.explanation} What to do: ${correctStep.text}`;
+    const speech = `${headingText}. ${bannerText} ${scenario.explanation} What to do: ${correctStep.text}`;
     return (
       <div className="page">
         <ScreenHeader stop listenText={speech} />
         {counter}
-        <h1 ref={heading} tabIndex={-1}>{good ? 'Well done' : 'Good try'}</h1>
+        <h1 ref={heading} tabIndex={-1}>{headingText}</h1>
         <div className={`verdict-banner ${good ? 'good' : 'try'}`} role="status">
           <span aria-hidden="true">{good ? '✔' : '➜'}</span>
-          {good ? 'You got it.' : scenario.verdict === 'scam' ? 'It fools a lot of people. Here is what to look for.' : 'Not every message is a scam. Here is what to look for.'}
+          {bannerText}
         </div>
         <ul className="checks">
           <li>
