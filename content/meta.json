@@ -1,8 +1,13 @@
 {
-  "content_version": "2.0.0",
+  "content_version": "2.1.0",
   "updated": "2026-11-20",
   "notes": "Bump content_version when any file in /content changes (patch = typo, minor = new or changed item, major = test forms change). Test-form changes invalidate comparisons with earlier results.",
   "history": [
+    {
+      "version": "2.1.0",
+      "date": "2026-11-20",
+      "summary": "S05 explanation: the CAFC phone number is replaced with the sample number (613) 555-0142 (NANPA fictional range), so no real line is dialled during testing. Practice item only; test forms unchanged."
+    },
     {
       "version": "2.0.0",
       "date": "2026-11-20",

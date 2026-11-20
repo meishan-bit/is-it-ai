@@ -68,7 +68,8 @@ export default function ProgressDashboard() {
           <li><span><strong>Talk to someone you trust</strong> before you send money or details.</span></li>
         </ol>
         <p className="muted" style={{ margin: '14px 0 0' }}>
-          Not sure? The Canadian Anti-Fraud Centre is at 1-888-495-8501.
+          Not sure? Call (613) 555-0142. This is a sample number for this student project. In real use, it would be the
+          Canadian Anti-Fraud Centre.
         </p>
       </div>
 
