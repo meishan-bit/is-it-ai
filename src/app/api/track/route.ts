@@ -1,6 +1,6 @@
 import { SCENARIOS } from '@/lib/content';
 import { evaluate } from '@/lib/scoring';
-import { storeEvent, supabaseConfigured } from '@/lib/supabase';
+import { isRuleError, storeEvent, supabaseConfigured } from '@/lib/supabase';
 import { validateTrackEvent } from '@/lib/track-validate';
 
 export const dynamic = 'force-dynamic';
@@ -21,6 +21,8 @@ export async function POST(req: Request) {
     return Response.json({ ok: true, stored: true });
   } catch (e) {
     console.error('track store failed', e instanceof Error ? e.message : e);
+    // The database refused this row, so retrying can't help. 422 tells the phone to drop it and send the next one (fix #13).
+    if (isRuleError(e)) return Response.json({ ok: false, error: 'rejected' }, { status: 422 });
     return Response.json({ ok: false, error: 'store_failed' }, { status: 502 });
   }
 }

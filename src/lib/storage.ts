@@ -70,11 +70,25 @@ export function setSeen(ids: string[]): void {
   write('seen', ids);
 }
 
-/** Clears practice history on this device. Test sessions and the anonymous id are left alone. */
+/**
+ * Clears practice history on this device, including practice answers still waiting to be sent (fix #13).
+ * Test sessions, their unsent answers and the anonymous id are left alone.
+ */
 export function clearProgress(): void {
-  const keep = getAttempts().filter((a) => a.mode !== 'practice');
+  const all = getAttempts();
+  const keep = all.filter((a) => a.mode !== 'practice');
   write('attempts', keep);
   remove('seen');
+  const practiceIds = new Set(all.filter((a) => a.mode === 'practice').map((a) => a.attempt_id));
+  saveOutbox(loadOutbox().filter((ev) => !isPracticeEvent(ev, practiceIds)));
+}
+
+function isPracticeEvent(ev: unknown, practiceIds: Set<string>): boolean {
+  if (!ev || typeof ev !== 'object') return true; // unreadable entries can never be sent
+  const e = ev as { attempt_id?: unknown; attempt?: { attempt_id?: unknown; mode?: unknown } };
+  if (e.attempt?.mode === 'practice') return true;
+  const id = typeof e.attempt_id === 'string' ? e.attempt_id : e.attempt?.attempt_id;
+  return typeof id === 'string' && practiceIds.has(id);
 }
 
 export function loadOutbox(): unknown[] {

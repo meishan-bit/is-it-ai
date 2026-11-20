@@ -154,3 +154,22 @@ test('sample data produces a full, sane dashboard', () => {
   const again = buildSampleData(meta, new Date('2026-11-12T12:00:00Z'));
   assert.equal(JSON.stringify(again), JSON.stringify(d), 'sample data must be deterministic');
 });
+
+import { isRuleError, normalizeSupabaseUrl, SupabaseError } from '../src/lib/supabase';
+
+test('#12 Supabase URL: a trailing /rest/v1 or slash is stripped', () => {
+  const want = 'https://abc.supabase.co';
+  for (const raw of [want, `${want}/`, `${want}/rest/v1`, `${want}/rest/v1/`, ` ${want}/REST/V1 `]) {
+    assert.equal(normalizeSupabaseUrl(raw), want);
+  }
+});
+
+test('#13 only database rule errors are dropped; set-up errors stay queued', () => {
+  assert.equal(isRuleError(new SupabaseError('fk', 409, '23503')), true); // answer with no matching attempt
+  assert.equal(isRuleError(new SupabaseError('check', 400, '23514')), true);
+  assert.equal(isRuleError(new SupabaseError('bad value', 400, '22P02')), true);
+  assert.equal(isRuleError(new SupabaseError('no grant', 403, '42501')), false);
+  assert.equal(isRuleError(new SupabaseError('bad path', 404, 'PGRST125')), false);
+  assert.equal(isRuleError(new SupabaseError('down', 503, null)), false);
+  assert.equal(isRuleError(new Error('network')), false);
+});
