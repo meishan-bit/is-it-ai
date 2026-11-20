@@ -41,8 +41,8 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
     return { sign: mix(scenario.sign_question.options, 'sign'), step: mix(scenario.step_question.options, 'step') };
   }, [scenario, mode, seed]);
 
-  // In a test, prompts are neutral so the wording of question 2 cannot give away the answer to question 1.
-  const signPrompt = mode === 'test' ? 'What is the most important clue?' : scenario.sign_question.prompt;
+  // Question 2 is neutral in practice and test alike, so its wording never contradicts or gives away question 1 (fix #2).
+  const signPrompt = 'What is the most important clue?';
   const stepPrompt = scenario.step_question.prompt;
 
   useEffect(() => {
@@ -76,6 +76,9 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
     <>
       <p className="stepcount">
         Example {index + 1} of {total}
+        {step !== 'feedback' && (
+          <span className="q">Question {step === 'verdict' ? 1 : step === 'sign' ? 2 : 3} of 3</span>
+        )}
       </p>
       <div className="dots" aria-hidden="true">
         {Array.from({ length: total }, (_, i) => (
@@ -87,7 +90,17 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
 
   // ---------------------------------------------------------------- feedback (practice only)
   if (step === 'feedback' && result) {
+    // Three outcomes (fix #3): all right, verdict right but safe step wrong, verdict wrong.
     const good = result.verdict_correct && result.step_correct;
+    const almost = result.verdict_correct && !result.step_correct;
+    const headingText = good ? 'Well done' : almost ? 'Almost' : 'Good try';
+    const bannerText = good
+      ? 'You got it.'
+      : almost
+        ? 'You spotted it. The safe step is the part to practise.'
+        : scenario.verdict === 'scam'
+          ? 'It fools a lot of people. Here is what to look for.'
+          : 'Not every message is a scam. Here is what to look for.';
     const correctSign = scenario.sign_question.options.find((o) => o.correct)!;
     const correctStep = scenario.step_question.options.find((o) => o.correct)!;
     const Mark = ({ ok }: { ok: boolean }) => (
@@ -97,50 +110,54 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
       </>
     );
     const signLabel = scenario.verdict === 'scam' ? 'Warning sign' : 'What makes it look safe';
-    const speech = `${good ? 'Well done.' : 'Good try. Here is what to look for.'} ${scenario.explanation} What to do: ${correctStep.text}`;
+    const speech = `${headingText}. ${bannerText} ${scenario.explanation} What to do: ${correctStep.text}`;
     return (
       <div className="page">
         <ScreenHeader stop listenText={speech} />
         {counter}
-        <h1 ref={heading} tabIndex={-1}>{good ? 'Well done' : 'Good try'}</h1>
+        <h1 ref={heading} tabIndex={-1}>{headingText}</h1>
         <div className={`verdict-banner ${good ? 'good' : 'try'}`} role="status">
           <span aria-hidden="true">{good ? '✔' : '➜'}</span>
-          {good ? 'You got it.' : scenario.verdict === 'scam' ? 'It fools a lot of people. Here is what to look for.' : 'Not every message is a scam. Here is what to look for.'}
-        </div>
-        <ul className="checks">
-          <li>
-            <Mark ok={result.verdict_correct} />
-            <span>
-              <strong>Real or scam:</strong> you said “{VERDICT_LABEL[result.verdict_choice]}”.{' '}
-              {result.verdict_correct ? 'That is right.' : `This one is ${scenario.verdict === 'scam' ? 'a scam' : 'real'}.`}
-            </span>
-          </li>
-          <li>
-            <Mark ok={result.sign_correct} />
-            <span>
-              <strong>{signLabel}:</strong> {result.sign_correct ? 'you spotted it.' : correctSign.text + '.'}
-            </span>
-          </li>
-          <li>
-            <Mark ok={result.step_correct} />
-            <span>
-              <strong>Safe step:</strong> {result.step_correct ? 'you chose well.' : 'see the box below.'}
-            </span>
-          </li>
-        </ul>
-        <div className="card">
-          <h2>Why</h2>
-          <p style={{ marginBottom: 0 }}>{scenario.explanation}</p>
+          {bannerText}
         </div>
         <div className="todo">
           <h3>What to do</h3>
           <p>{correctStep.text}.</p>
         </div>
         {(scenario.highlights.length > 0) && <p className="muted">The clues are highlighted below.</p>}
-        <ScenarioView scenario={scenario} highlight transcriptOpen />
+        <ScenarioView scenario={scenario} highlight transcriptOpen hideRecording />
+        {/* Score details and "Why" fold away so the result, the safe step and the clues come first (fix #4). */}
+        <details className="sources">
+          <summary>More detail</summary>
+          <div style={{ marginTop: 14 }}>
+          <ul className="checks">
+            <li>
+              <Mark ok={result.verdict_correct} />
+              <span>
+                <strong>Real or scam:</strong> you said “{VERDICT_LABEL[result.verdict_choice]}”.{' '}
+                {result.verdict_correct ? 'That is right.' : `This one is ${scenario.verdict === 'scam' ? 'a scam' : 'real'}.`}
+              </span>
+            </li>
+            <li>
+              <Mark ok={result.sign_correct} />
+              <span>
+                <strong>{signLabel}:</strong> {result.sign_correct ? 'you spotted it.' : correctSign.text + '.'}
+              </span>
+            </li>
+            <li>
+              <Mark ok={result.step_correct} />
+              <span>
+                <strong>Safe step:</strong> {result.step_correct ? 'you chose well.' : 'see "What to do" above.'}
+              </span>
+            </li>
+          </ul>
+            <h2>Why</h2>
+            <p>{scenario.explanation}</p>
+          </div>
+        </details>
         {scenario.source_urls.length > 0 && (
-          <details className="muted">
-            <summary style={{ minHeight: 44, display: 'flex', alignItems: 'center', cursor: 'pointer' }}>Where this comes from</summary>
+          <details className="sources">
+            <summary>Where this comes from</summary>
             <ul>
               {scenario.source_urls.map((u, i) => (
                 <li key={u}>
