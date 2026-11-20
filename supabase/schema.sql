@@ -46,3 +46,10 @@ create index if not exists responses_scenario_idx on responses (scenario_id);
 alter table participants enable row level security;
 alter table attempts     enable row level security;
 alter table responses    enable row level security;
+
+-- Access for the server (fix #11). Supabase projects created after May 30, 2026 (and all projects from Oct 30, 2026)
+-- no longer give the Data API access to new tables automatically. Without these lines every save fails.
+-- service_role only: it is the key the server uses. anon and authenticated get nothing.
+grant select, insert, update on participants, attempts, responses to service_role;
+grant usage, select on sequence responses_id_seq to service_role;
+revoke all on participants, attempts, responses from anon, authenticated;
