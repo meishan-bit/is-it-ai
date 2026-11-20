@@ -1,5 +1,5 @@
 import { adminConfigured, isAuthenticated } from '@/lib/admin-auth';
-import { loadAdminDataset } from '@/lib/admin-data';
+import { loadAdminDataset, SCENARIO_META } from '@/lib/admin-data';
 import { responsesToCsv } from '@/lib/csv';
 
 export const dynamic = 'force-dynamic';
@@ -9,7 +9,8 @@ export async function GET(req: Request) {
   if (!isAuthenticated(req)) return Response.json({ error: 'unauthorized' }, { status: 401 });
   try {
     const d = await loadAdminDataset();
-    const csv = responsesToCsv(d.attempts, d.responses);
+    const verdicts = new Map(SCENARIO_META.map((s) => [s.id, s.verdict]));
+    const csv = responsesToCsv(d.attempts, d.responses, (id) => verdicts.get(id));
     const day = new Date().toISOString().slice(0, 10);
     return new Response(csv, {
       status: 200,
