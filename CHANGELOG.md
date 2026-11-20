@@ -3,6 +3,12 @@
 All notable changes to **Is It AI?**. The app version (package.json) and the content version (content/meta.json) are tracked separately.
 Format: [app x.y.z] for code, [content x.y.z] for scenarios, glossary and tactic guides.
 
+## [app 1.1.1] - 2026-11-20
+- My progress: the CAFC phone number is replaced with the sample number (613) 555-0142, labelled as standing in for the Canadian Anti-Fraud Centre in real use.
+
+## [content 2.1.0] - 2026-11-20
+- S05 explanation: the CAFC phone number is replaced with the sample number (613) 555-0142 (NANPA fictional range), so no real line is dialled during testing. Practice item only; test forms unchanged.
+
 ## [content 2.0.0] - 2026-11-20
 - Week 3 content pack. Answer options rewritten for all 20 items: the correct answer is now the longest option in 5 of 20 sign questions (was 19) and 7 of 20 safe-step questions (was 18), and only by 1-5 characters.
 - Pair P2 replaced: S13 is a real power bill reminder (Northshore Power) and S14 a real phone bill reminder (Lakeshore Mobile). Each test form is now 3 scams + 2 real; 14 scams + 6 real overall. The old S13-S14 CRA refund and benefit scams (T3) are reserve items, not in the app.
