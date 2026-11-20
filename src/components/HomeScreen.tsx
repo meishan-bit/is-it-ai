@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Icon from './Icon';
 import ListenButton from './ListenButton';
+import ThemeSwitch from './ThemeSwitch';
 import { getSession } from '@/lib/storage';
 import { flushOutbox } from '@/lib/tracker';
 import type { TestSession } from '@/lib/types';
@@ -79,6 +80,8 @@ export default function HomeScreen() {
           Taking part in a research session? <Link href="/test">Start your test here</Link>.
         </p>
       )}
+
+      <ThemeSwitch />
     </div>
   );
 }

@@ -40,11 +40,13 @@ export default function ListenButton({ text }: { text: string }) {
     synth.speak(u);
   }
 
+  // In-app browsers (a link opened from a text or email) and some others have no built-in voice. Say what to do
+  // instead of showing a button that does nothing (fix #9).
   if (!supported) {
     return (
-      <button type="button" className="btn btn-secondary btn-inline" disabled aria-disabled="true">
-        <Icon name="listen-off" /> Listen not available
-      </button>
+      <p className="listen-note" role="note">
+        <Icon name="listen-off" /> <span>To hear this, open the app in Chrome or Safari.</span>
+      </p>
     );
   }
   return (

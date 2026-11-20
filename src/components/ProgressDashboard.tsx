@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ScreenHeader from './ScreenHeader';
-import { PRACTICE_POOL, TACTICS, getScenario } from '@/lib/content';
+import { PRACTICE_POOL, SCENARIOS, TACTICS, getScenario } from '@/lib/content';
 import { isExampleRight } from '@/lib/scoring';
 import { clearProgress, getAttempts } from '@/lib/storage';
 import type { AttemptRecord } from '@/lib/types';
@@ -52,8 +52,8 @@ export default function ProgressDashboard() {
         </div>
       ) : (
         <div className="stat-grid">
-          <div className="stat"><div className="num">{done.length}</div><div className="lbl">rounds finished</div></div>
-          <div className="stat"><div className="num">{responses.length}</div><div className="lbl">examples practised</div></div>
+          <div className="stat"><div className="num">{done.length}</div><div className="lbl">{done.length === 1 ? 'round' : 'rounds'} finished</div></div>
+          <div className="stat"><div className="num">{responses.length}</div><div className="lbl">{responses.length === 1 ? 'example' : 'examples'} practised</div></div>
           <div className="stat"><div className="num">{pct}%</div><div className="lbl">spotted and handled safely</div></div>
         </div>
       )}
@@ -88,7 +88,13 @@ export default function ProgressDashboard() {
             {hasPractice && n > 0 && p !== null && (
               <p className="muted">You have practised this {n} {n === 1 ? 'time' : 'times'} and handled it well {p}% of the time.</p>
             )}
-            {!hasPractice && <p className="muted">This one appears in the research check, not in practice rounds.</p>}
+            {!hasPractice && (
+              <p className="muted">
+                {SCENARIOS.some((s) => s.tactic === t.id)
+                  ? 'This one appears in the research check, not in practice rounds.'
+                  : 'There is no example of this one in the app yet. Learn the signs above.'}
+              </p>
+            )}
           </div>
         </details>
       ))}

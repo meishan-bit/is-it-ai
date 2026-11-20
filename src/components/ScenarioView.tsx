@@ -23,10 +23,13 @@ export default function ScenarioView({
   scenario,
   highlight = false,
   transcriptOpen = false,
+  hideRecording = false,
 }: {
   scenario: Scenario;
   highlight?: boolean;
   transcriptOpen?: boolean;
+  /** Feedback screens show the transcript only: the recording was already played on the question screens (fix #4). */
+  hideRecording?: boolean;
 }) {
   const [audioFailed, setAudioFailed] = useState(false);
   const phrases = highlight ? scenario.highlights : [];
@@ -63,7 +66,7 @@ export default function ScenarioView({
 
       {scenario.format === 'audio' && scenario.media_url && (
         <>
-          <AudioPlayer src={scenario.media_url} onFail={() => setAudioFailed(true)} />
+          {!hideRecording && <AudioPlayer src={scenario.media_url} onFail={() => setAudioFailed(true)} />}
           {scenario.transcript && (
             <details className="transcript" open={audioFailed || transcriptOpen}>
               <summary>Read what was said</summary>

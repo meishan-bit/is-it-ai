@@ -8,7 +8,7 @@ Target: WCAG 2.2 AA, with the senior-friendly choices from the Week 1 pack.
 |------|--------|
 | Body text 22 px (proposal minimum 18 px) | Measured: 22 px |
 | Tap targets 52-72 px, single taps only | Measured: answers 72 px, top-bar buttons 52 px, main buttons 64 px or more |
-| Text contrast 4.5:1 or higher | Every text pair measures 8:1 or higher (ink on warm white 13.9, white on button blue 8.4, soft grey text 8.3, amber note text 9.1). Borders and focus rings are 5:1 or higher |
+| Text contrast 4.5:1 or higher | Every text pair measures 8:1 or higher (ink on warm white 13.9, white on button blue 8.4, soft grey text 8.3, amber note text 9.1). Control borders (button blue, 7.9:1) and focus rings are 3:1 or higher; card outlines are decorative and lighter |
 | Meaning never by colour alone | Right/not-quite always shows a symbol and words; highlights are bold and underlined, not just coloured |
 | No red in the app interface | Done (the pop-up mock-ups M6 and M7 are red because real scam pop-ups are) |
 | Read-aloud ("Listen") on every screen | Done, browser voice, starts on tap (works with iPhone's tap-to-play rule) |
