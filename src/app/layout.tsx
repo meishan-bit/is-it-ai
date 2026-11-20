@@ -10,13 +10,24 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#1d4e89',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#1d4e89' },
+    { media: '(prefers-color-scheme: dark)', color: '#16181c' },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-CA">
+    // suppressHydrationWarning: the script below may set data-theme before React loads.
+    <html lang="en-CA" suppressHydrationWarning>
       <head>
+        {/* Applies a saved Light/Dark choice before the page draws, so there is no flash of the wrong theme (fix #14). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('isitai.v1.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}",
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* Atkinson Hyperlegible Next separates look-alike characters (I, l, 1 and O, 0). If it cannot load, system fonts are used. */}
