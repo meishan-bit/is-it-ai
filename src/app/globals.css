@@ -109,7 +109,21 @@ figure.media.tall img { width: auto; max-width: 100%; max-height: 62vh; margin: 
 .audio-box { display: grid; gap: 10px; }
 .audio-box .btn { min-height: 72px; }
 details.transcript { margin-top: 12px; }
-details.transcript summary { cursor: pointer; font-weight: 700; color: var(--blue-dark); min-height: 44px; display: flex; align-items: center; }
+/* Toggles look like secondary buttons with an arrow that turns when open (fix #6). */
+details.transcript summary, details.sources summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 64px; padding: 12px 20px; font-weight: 700; color: var(--ink);
+  background: var(--blue-soft); border: 3px solid var(--blue); border-radius: var(--radius);
+}
+details.transcript summary::-webkit-details-marker, details.sources summary::-webkit-details-marker { display: none; }
+details.transcript summary::after, details.sources summary::after {
+  content: ''; flex: none; width: 0.6em; height: 0.6em; margin-top: -0.3em;
+  border-right: 4px solid currentColor; border-bottom: 4px solid currentColor; transform: rotate(45deg);
+}
+details[open].transcript summary::after, details[open].sources summary::after { transform: rotate(225deg); margin-top: 0.3em; }
+details.transcript summary:hover, details.sources summary:hover { background: #c9ddf3; }
+details.sources { margin: 0 0 18px; }
+details.sources ul { margin: 12px 0 0; }
 details.transcript p { margin: 8px 0 0; }
 mark { background: var(--mark); color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 3px; padding: 0 2px; border-radius: 4px; }
 

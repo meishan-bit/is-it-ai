@@ -142,8 +142,8 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
         {(scenario.highlights.length > 0) && <p className="muted">The clues are highlighted below.</p>}
         <ScenarioView scenario={scenario} highlight transcriptOpen />
         {scenario.source_urls.length > 0 && (
-          <details className="muted">
-            <summary style={{ minHeight: 44, display: 'flex', alignItems: 'center', cursor: 'pointer' }}>Where this comes from</summary>
+          <details className="sources">
+            <summary>Where this comes from</summary>
             <ul>
               {scenario.source_urls.map((u, i) => (
                 <li key={u}>
