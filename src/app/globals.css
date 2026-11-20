@@ -64,7 +64,7 @@ h1[tabindex='-1']:focus { outline: none; }
 .btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
 .btn-secondary { background: var(--blue-soft); color: var(--ink); }
 .btn-secondary:hover { background: #c9ddf3; color: var(--ink); border-color: var(--blue); }
-.btn-quiet { background: transparent; color: var(--blue); border-color: var(--line); min-height: 52px; font-weight: 600; }
+.btn-quiet { background: transparent; color: var(--blue); border-color: var(--blue); /* 7.9:1 on the page (fix #8) */ min-height: 52px; font-weight: 600; }
 .btn-quiet:hover { background: var(--blue-soft); color: var(--blue-dark); border-color: var(--blue); }
 .btn-inline { width: auto; }
 .btn[disabled], .btn[aria-disabled='true'] { opacity: 0.6; cursor: not-allowed; }
