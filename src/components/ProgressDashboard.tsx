@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ScreenHeader from './ScreenHeader';
-import { PRACTICE_POOL, TACTICS, getScenario } from '@/lib/content';
+import { PRACTICE_POOL, SCENARIOS, TACTICS, getScenario } from '@/lib/content';
 import { isExampleRight } from '@/lib/scoring';
 import { clearProgress, getAttempts } from '@/lib/storage';
 import type { AttemptRecord } from '@/lib/types';
@@ -88,7 +88,13 @@ export default function ProgressDashboard() {
             {hasPractice && n > 0 && p !== null && (
               <p className="muted">You have practised this {n} {n === 1 ? 'time' : 'times'} and handled it well {p}% of the time.</p>
             )}
-            {!hasPractice && <p className="muted">This one appears in the research check, not in practice rounds.</p>}
+            {!hasPractice && (
+              <p className="muted">
+                {SCENARIOS.some((s) => s.tactic === t.id)
+                  ? 'This one appears in the research check, not in practice rounds.'
+                  : 'There is no example of this one in the app yet. Learn the signs above.'}
+              </p>
+            )}
           </div>
         </details>
       ))}

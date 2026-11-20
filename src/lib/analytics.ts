@@ -34,6 +34,16 @@ export interface ScenarioMeta {
   tactic: string;
   pair_id: string | null;
   form: string | null;
+  /** Needed to report scams caught and real messages trusted separately (Week 3 test plan). */
+  verdict?: 'scam' | 'real';
+}
+
+/** Verdict accuracy split by what the message really was: scams caught, real messages trusted. */
+export interface VerdictSplit {
+  scams_caught: number;
+  scams_total: number;
+  real_trusted: number;
+  real_total: number;
 }
 
 export const TARGET_PP = 20;
@@ -44,6 +54,27 @@ const mean = (xs: number[]) => (xs.length === 0 ? null : r1(xs.reduce((a, b) => 
 const points = (rs: ResponseRow[]) => rs.reduce((s, r) => s + (r.verdict_correct ? 1 : 0) + (r.step_correct ? 1 : 0), 0);
 const isTestCode = (id: string) => /^T\d+$/.test(id);
 
+function verdictSplit(rs: ResponseRow[], verdictOf: (id: string) => 'scam' | 'real' | undefined): VerdictSplit {
+  const out: VerdictSplit = { scams_caught: 0, scams_total: 0, real_trusted: 0, real_total: 0 };
+  for (const r of rs) {
+    const v = verdictOf(r.scenario_id);
+    if (v === 'scam') {
+      out.scams_total += 1;
+      if (r.verdict_correct) out.scams_caught += 1;
+    } else if (v === 'real') {
+      out.real_total += 1;
+      if (r.verdict_correct) out.real_trusted += 1;
+    }
+  }
+  return out;
+}
+
+function splitPct(splits: VerdictSplit[], part: 'scams' | 'real'): number | null {
+  const num = splits.reduce((a, s) => a + (part === 'scams' ? s.scams_caught : s.real_trusted), 0);
+  const den = splits.reduce((a, s) => a + (part === 'scams' ? s.scams_total : s.real_total), 0);
+  return pct(num, den);
+}
+
 export interface TesterRow {
   anon_id: string;
   pre_form: string | null;
@@ -53,6 +84,8 @@ export interface TesterRow {
   max: number;
   change_points: number | null;
   change_pp: number | null;
+  pre_split: VerdictSplit | null;
+  post_split: VerdictSplit | null;
 }
 
 export interface AdminStats {
@@ -79,6 +112,11 @@ export interface AdminStats {
     target_pp: number;
     target_met: boolean | null;
     improved: number;
+    /** Share of scam items called "scam" and real items called "real", across finished testers. */
+    pre_scams_caught_pct: number | null;
+    pre_real_trusted_pct: number | null;
+    post_scams_caught_pct: number | null;
+    post_real_trusted_pct: number | null;
     rows: TesterRow[];
   };
   by_tactic: { tactic: string; responses: number; both_pct: number | null; verdict_pct: number | null; step_pct: number | null }[];
@@ -126,6 +164,7 @@ export function aggregate(
   now: Date = new Date(),
 ): AdminStats {
   const byId = new Map(scenarios.map((s) => [s.id, s]));
+  const verdictOf = (id: string) => byId.get(id)?.verdict;
   const resByAttempt = new Map<string, ResponseRow[]>();
   for (const r of responses) {
     const list = resByAttempt.get(r.attempt_id);
@@ -171,6 +210,8 @@ export function aggregate(
       max,
       change_points: prePts !== null && postPts !== null ? postPts - prePts : null,
       change_pp: prePts !== null && postPts !== null ? r1(((postPts - prePts) / max) * 100) : null,
+      pre_split: pre ? verdictSplit(preR, verdictOf) : null,
+      post_split: post ? verdictSplit(postR, verdictOf) : null,
     });
   }
   const both = rows.filter((r) => r.pre_points !== null && r.post_points !== null);
@@ -289,6 +330,10 @@ export function aggregate(
       target_pp: TARGET_PP,
       target_met: avgChangePp === null ? null : avgChangePp >= TARGET_PP,
       improved: both.filter((r) => (r.change_pp as number) > 0).length,
+      pre_scams_caught_pct: splitPct(both.map((r) => r.pre_split as VerdictSplit), 'scams'),
+      pre_real_trusted_pct: splitPct(both.map((r) => r.pre_split as VerdictSplit), 'real'),
+      post_scams_caught_pct: splitPct(both.map((r) => r.post_split as VerdictSplit), 'scams'),
+      post_real_trusted_pct: splitPct(both.map((r) => r.post_split as VerdictSplit), 'real'),
       rows,
     },
     by_tactic,

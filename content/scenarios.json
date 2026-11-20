@@ -31,17 +31,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A new number, a rush, and a request to keep it secret",
+            "text": "A new number, a rush for cash and a secret",
             "correct": true
           },
           {
             "id": "b",
-            "text": "The message has a spelling mistake",
+            "text": "It calls you Grandma instead of your name",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It was sent in the afternoon",
+            "text": "The message is longer than his usual texts",
             "correct": false
           }
         ]
@@ -51,17 +51,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Call Jake or his parents on the number you already have",
+            "text": "Call Jake or his parents on the number you have",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Call the new number to check that it's his voice",
+            "text": "Call the new number back to hear if it's his voice",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Get the cash ready in case it's real",
+            "text": "Get the cash ready in case the story is true",
             "correct": false
           }
         ]
@@ -105,17 +105,17 @@
         "options": [
           {
             "id": "a",
-            "text": "It asks you to keep a bank matter secret and help with an investigation",
+            "text": "It asks you to keep a bank matter secret",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It shows the bank's name",
+            "text": "It shows the bank's name instead of a number",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The amount has cents in it",
+            "text": "The amount blocked has cents in it",
             "correct": false
           }
         ]
@@ -125,17 +125,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Call the number on the back of your bank card",
+            "text": "Call the number on the back of your card",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Wait for the investigator's call and follow their steps",
+            "text": "Wait for the investigator's call and follow along",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Go to your branch and withdraw cash to keep it safe",
+            "text": "Take out cash at your branch to keep it safe",
             "correct": false
           }
         ]
@@ -184,12 +184,12 @@
           },
           {
             "id": "b",
-            "text": "It mentions Canada Post",
+            "text": "It says the parcel is held at a Canada Post depot",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The fee is under $2",
+            "text": "It was sent from a number in Manitoba",
             "correct": false
           }
         ]
@@ -199,17 +199,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Delete it, and track parcels in the store's own website or app",
+            "text": "Delete it and track parcels in the store's app",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Pay the $1.99, since it's only a small amount",
+            "text": "Pay the $1.99, since it's such a small amount",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Reply to ask which parcel it is",
+            "text": "Reply to the text to ask which parcel it is",
             "correct": false
           }
         ]
@@ -250,17 +250,17 @@
         "options": [
           {
             "id": "a",
-            "text": "No link, no payment and no rush",
+            "text": "It asks for nothing: no link, money or rush",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It says \"please\" and \"thank you\"",
+            "text": "It's from a business, and businesses don't scam",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It comes from a business",
+            "text": "It has an opt-out line, so it must be legal",
             "correct": false
           }
         ]
@@ -270,7 +270,7 @@
         "options": [
           {
             "id": "a",
-            "text": "Pick it up as usual, or call the pharmacy number you already know if unsure",
+            "text": "Pick it up at the pharmacy as you usually would",
             "correct": true
           },
           {
@@ -280,7 +280,7 @@
           },
           {
             "id": "c",
-            "text": "Ignore it, since all texts are scams",
+            "text": "Ignore it, since texts about health are risky",
             "correct": false
           }
         ]
@@ -317,17 +317,17 @@
         "options": [
           {
             "id": "a",
-            "text": "You have to pay a fee to get money back",
+            "text": "You must pay a fee to get your money back",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It names a government agency",
+            "text": "It names a real government fraud office",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The amount is very exact",
+            "text": "The amount recovered is very exact",
             "correct": false
           }
         ]
@@ -337,17 +337,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't reply; check with the CAFC at 1-888-495-8501 or on its official website",
+            "text": "Don't reply; call the CAFC at its official number",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Pay the fee, since you'll get $8,450 back",
+            "text": "Send your banking details, but hold back the $250 fee",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Send your banking details but not the fee",
+            "text": "Pay the fee, since you'd get $8,450 back",
             "correct": false
           }
         ]
@@ -370,7 +370,7 @@
       "verdict": "scam",
       "sender_label": "+1 (416) 555-0121",
       "message": [
-        "Toll Services Notice: You have an unpaid toll balance of $6.85. To avoid a $50 late fee and a hold on your license renewal, pay within 24 hours: tollpay-canada-services.com"
+        "Toll Services Notice: You have an unpaid toll balance of $6.85. To avoid a $50 late fee and a hold on your licence renewal, pay within 24 hours: tollpay-canada-services.com"
       ],
       "media_id": null,
       "media_kind": null,
@@ -380,7 +380,7 @@
       "caption": null,
       "ai_generated": false,
       "highlights": [
-        "avoid a $50 late fee and a hold on your license renewal",
+        "avoid a $50 late fee and a hold on your licence renewal",
         "pay within 24 hours",
         "tollpay-canada-services.com"
       ],
@@ -389,17 +389,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A threat, a 24-hour deadline and a link to pay",
+            "text": "A threat, a deadline and a link to pay",
             "correct": true
           },
           {
             "id": "b",
-            "text": "The amount is small",
+            "text": "The toll amount is small, under seven dollars",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It mentions your license",
+            "text": "It was sent from a Toronto phone number",
             "correct": false
           }
         ]
@@ -409,17 +409,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Delete it. If you use a toll road, sign in to your account by typing the address yourself",
+            "text": "Delete it; check your toll account yourself",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Pay the $6.85 to be safe",
+            "text": "Pay the $6.85 now so the late fee doesn't start",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Reply to ask which trip it was for",
+            "text": "Reply to ask which trip the toll was for",
             "correct": false
           }
         ]
@@ -465,17 +465,17 @@
         "options": [
           {
             "id": "a",
-            "text": "He never video chats and suddenly needs money",
+            "text": "He avoids video chat and now needs money",
             "correct": true
           },
           {
             "id": "b",
-            "text": "His photo looks professional",
+            "text": "He uses your first name in every message",
             "correct": false
           },
           {
             "id": "c",
-            "text": "He writes very kindly",
+            "text": "He writes long, kind messages every morning",
             "correct": false
           }
         ]
@@ -485,17 +485,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't send money; talk to someone you trust and report the profile",
+            "text": "Don't send money; talk to someone you trust",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Send part of the money to help",
+            "text": "Send money only if he agrees to a video call",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Send the money if he agrees to a video call first",
+            "text": "Send part of the money and keep the receipt",
             "correct": false
           }
         ]
@@ -538,17 +538,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Threats, \"don't call the police\" and a demand for money today",
+            "text": "Threats, \"no police\" and money demanded today",
             "correct": true
           },
           {
             "id": "b",
-            "text": "The man sounds calm",
+            "text": "The man sounds calm and speaks very clearly",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The call came from a local area code",
+            "text": "The call came from a local Toronto number",
             "correct": false
           }
         ]
@@ -558,17 +558,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't call back. Call Emily or her parents on the number you already have; if you can't reach her, call 911",
+            "text": "Call Emily or her parents; if no answer, call 911",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Call back and ask to speak to Emily",
+            "text": "Call back and ask to speak to Emily directly",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Get the money ready while you wait",
+            "text": "Get the money ready while you wait for the next call",
             "correct": false
           }
         ]
@@ -615,12 +615,12 @@
           },
           {
             "id": "b",
-            "text": "It is friendly",
+            "text": "It's friendly and mentions Sunday plans with his mom",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It mentions his mom",
+            "text": "It has no spelling mistakes, so it's not a scam",
             "correct": false
           }
         ]
@@ -630,7 +630,7 @@
         "options": [
           {
             "id": "a",
-            "text": "Reply as you normally would",
+            "text": "Reply to Jake as you normally would",
             "correct": true
           },
           {
@@ -640,7 +640,7 @@
           },
           {
             "id": "c",
-            "text": "Ask him to send his birthday to prove it's him",
+            "text": "Don't reply until he proves it's really him",
             "correct": false
           }
         ]
@@ -676,17 +676,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A surprise call about a virus, asking you to let them connect to your computer",
+            "text": "A surprise call about a virus, asking to connect",
             "correct": true
           },
           {
             "id": "b",
-            "text": "The caller gives his name",
+            "text": "The caller gives his first name and department",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The number is toll-free",
+            "text": "The callback number is toll-free, not local",
             "correct": false
           }
         ]
@@ -696,17 +696,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Delete it and don't call back. If your computer seems wrong, ask someone you trust or a local repair shop",
+            "text": "Delete it and don't call the number back",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Call back to ask questions first",
+            "text": "Call back first just to ask a few questions",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Let them connect, but watch the screen",
+            "text": "Let them connect, but watch what they do",
             "correct": false
           }
         ]
@@ -748,17 +748,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A new number, bail money today and \"don't tell Mom\"",
+            "text": "Bail money today and \"don't tell Mom\"",
             "correct": true
           },
           {
             "id": "b",
-            "text": "He sounds upset",
+            "text": "He says \"I love you\" at the end",
             "correct": false
           },
           {
             "id": "c",
-            "text": "He says \"I love you\"",
+            "text": "He mentions his friend's car, not his own",
             "correct": false
           }
         ]
@@ -768,17 +768,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Hang up and call your grandson or his parents on the number you already have",
+            "text": "Hang up and call him or his parents directly",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Wait for the lawyer's call and follow his steps",
+            "text": "Wait for the lawyer's call and do what he says",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Ask a question only he would know, and help if he gets it right",
+            "text": "Ask a question only he'd know, then help him",
             "correct": false
           }
         ]
@@ -822,17 +822,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A new number, money to stay out of jail and \"don't tell Dad\"",
+            "text": "Jail money today and \"don't tell Dad\"",
             "correct": true
           },
           {
             "id": "b",
-            "text": "He says he cut his lip",
+            "text": "He says \"I'm really scared\" at the end",
             "correct": false
           },
           {
             "id": "c",
-            "text": "He sounds scared",
+            "text": "He talks about the other driver",
             "correct": false
           }
         ]
@@ -842,17 +842,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Hang up and call your grandson or his parents on the number you already have",
+            "text": "Hang up and call him or his parents directly",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Wait for the lawyer's call and follow his steps",
+            "text": "Wait for the lawyer's call and do what he says",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Ask a question only he would know, and help if he gets it right",
+            "text": "Ask a question only he'd know, then help him",
             "correct": false
           }
         ]
@@ -874,12 +874,12 @@
       "use": "pre",
       "pair_id": "P2",
       "form": "A",
-      "tactic": "T3",
+      "tactic": "real",
       "format": "text",
-      "verdict": "scam",
-      "sender_label": "+1 (613) 555-0109",
+      "verdict": "real",
+      "sender_label": "Northshore Power",
       "message": [
-        "CRA: You have received an Interac e-Transfer of $437.85 for your 2025 tax refund. Accept your deposit before Nov 30: cra-refund-deposit.ca"
+        "Northshore Power: Your account is past due ($142.18). To avoid a late fee, please pay by Nov 28 in your online account, through your bank, or by phone banking. We never ask for payment by text, e-transfer or gift card."
       ],
       "media_id": null,
       "media_kind": null,
@@ -889,26 +889,25 @@
       "caption": null,
       "ai_generated": false,
       "highlights": [
-        "Interac e-Transfer of $437.85 for your 2025 tax refund",
-        "Accept your deposit before Nov 30",
-        "cra-refund-deposit.ca"
+        "please pay by Nov 28 in your online account, through your bank, or by phone banking",
+        "We never ask for payment by text, e-transfer or gift card."
       ],
       "sign_question": {
-        "prompt": "What is the biggest warning sign?",
+        "prompt": "What makes this look safe?",
         "options": [
           {
             "id": "a",
-            "text": "A tax refund sent by e-transfer, with a link and a deadline",
+            "text": "No link; it tells you to pay the usual ways",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It names the CRA",
+            "text": "It shows the exact amount you owe, with cents",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The amount has cents in it",
+            "text": "It warns you about a late fee and a deadline",
             "correct": false
           }
         ]
@@ -918,42 +917,36 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't click. Check your refund in CRA My Account by typing canada.ca yourself",
+            "text": "Check your bill or account, then pay as usual",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Click the link just to look",
+            "text": "Reply to the text with your card to pay now",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Reply to ask if it's real",
+            "text": "Ignore it, since bill texts are always scams",
             "correct": false
           }
         ]
       },
-      "explanation": "This is a scam. The CRA does not send refunds by Interac e-Transfer or by a text with a link. Real refunds come by direct deposit or cheque. Don't click. To check a refund, sign in to CRA My Account by typing canada.ca yourself.",
-      "source_labels": [
-        "CRA: Recognize a scam",
-        "CRA scam alerts"
-      ],
-      "source_urls": [
-        "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam",
-        "https://www.canada.ca/en/revenue-agency/corporate/security/protect-yourself-against-fraud/scam-alerts.html"
-      ]
+      "explanation": "This one is likely real. It sounds worrying, but there is no link, and it tells you to pay the ways you already use. If you're unsure, check your online account or call the number on your paper bill. Never pay a bill through a link in a text.",
+      "source_labels": [],
+      "source_urls": []
     },
     {
       "id": "S14",
       "use": "post",
       "pair_id": "P2",
       "form": "B",
-      "tactic": "T3",
+      "tactic": "real",
       "format": "text",
-      "verdict": "scam",
-      "sender_label": "+1 (613) 555-0114",
+      "verdict": "real",
+      "sender_label": "Lakeshore Mobile",
       "message": [
-        "Government of Canada: You qualify for the 2026 Seniors Grocery Benefit of $528. Apply by Nov 30 to receive your payment: canada-benefits-apply.ca. Have your SIN and banking details ready."
+        "Lakeshore Mobile: Your bill of $96.35 is overdue. To avoid a pause in service, please pay by Nov 28 in the Lakeshore app or by calling 611 from your phone. We never ask for payment by text link or gift card."
       ],
       "media_id": null,
       "media_kind": null,
@@ -963,26 +956,25 @@
       "caption": null,
       "ai_generated": false,
       "highlights": [
-        "Apply by Nov 30 to receive your payment",
-        "canada-benefits-apply.ca",
-        "Have your SIN and banking details ready"
+        "please pay by Nov 28 in the Lakeshore app or by calling 611 from your phone",
+        "We never ask for payment by text link or gift card."
       ],
       "sign_question": {
-        "prompt": "What is the biggest warning sign?",
+        "prompt": "What makes this look safe?",
         "options": [
           {
             "id": "a",
-            "text": "A text link asking for your SIN and banking details, with a deadline",
+            "text": "No link; it sends you to the app or 611",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It names the Government of Canada",
+            "text": "It names your phone company and the exact bill",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The benefit has a specific amount",
+            "text": "It says your service could be paused",
             "correct": false
           }
         ]
@@ -992,30 +984,24 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't click. Look up any benefit by typing canada.ca yourself or calling Service Canada",
+            "text": "Check your bill in the app, then pay as usual",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Apply quickly before the deadline",
+            "text": "Reply to the text with your card to pay now",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Reply to ask for more details",
+            "text": "Ignore it, since bill texts are always scams",
             "correct": false
           }
         ]
       },
-      "explanation": "This is a scam. The government does not text you a link asking for your SIN and banking details. Scammers invent benefits that sound real, often near tax time. Don't click. Check any benefit by typing canada.ca yourself or by calling Service Canada.",
-      "source_labels": [
-        "CRA scam alerts",
-        "CRA: Recognize a scam"
-      ],
-      "source_urls": [
-        "https://www.canada.ca/en/revenue-agency/corporate/security/protect-yourself-against-fraud/scam-alerts.html",
-        "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam"
-      ]
+      "explanation": "This one is likely real. It sounds worrying, but there is no link, and it sends you to the app or to 611, the short number your phone company already uses. If you're unsure, check your bill in the app. Never pay a bill through a link in a text.",
+      "source_labels": [],
+      "source_urls": []
     },
     {
       "id": "S15",
@@ -1040,17 +1026,17 @@
         "options": [
           {
             "id": "a",
-            "text": "An alarm screen with a phone number to call and a countdown",
+            "text": "A phone number to call and a countdown",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It uses the name Microsoft",
+            "text": "It uses the Microsoft name in red",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It shows an error message",
+            "text": "It shows an error code like a real alert",
             "correct": false
           }
         ]
@@ -1060,17 +1046,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Close the browser, or restart the computer if it won't close. Never call the number",
+            "text": "Close the browser; restart if it won't close",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Call the number to ask if it's real",
+            "text": "Call the number just to ask if the alert is real",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Click \"Scan now\"",
+            "text": "Click \"Scan now\" to check for the virus",
             "correct": false
           }
         ]
@@ -1108,17 +1094,17 @@
         "options": [
           {
             "id": "a",
-            "text": "An alarm screen with a phone number to call and a countdown",
+            "text": "A phone number to call and a countdown",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It uses the name Apple",
+            "text": "It uses the Apple name in red",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It says how many viruses",
+            "text": "It says how many viruses it found",
             "correct": false
           }
         ]
@@ -1128,17 +1114,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Close the browser tab, or restart the phone if it won't close. Never call the number",
+            "text": "Close the tab; restart the phone if it won't close",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Call the number to ask if it's real",
+            "text": "Call the number just to ask if the alert is real",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Tap \"Scan now\"",
+            "text": "Tap \"Scan now\" to check for the viruses",
             "correct": false
           }
         ]
@@ -1177,17 +1163,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A famous person promising huge, quick returns on a \"government-backed\" platform",
+            "text": "Huge, quick returns from a \"government\" platform",
             "correct": true
           },
           {
             "id": "b",
-            "text": "She is in a TV studio",
+            "text": "She's a well-known business host in a TV studio",
             "correct": false
           },
           {
             "id": "c",
-            "text": "The ad has a caption",
+            "text": "The ad has a caption with her exact words",
             "correct": false
           }
         ]
@@ -1197,17 +1183,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't click. Check the firm at aretheyregistered.ca and any program on canada.ca",
+            "text": "Don't click; check the firm at aretheyregistered.ca",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Click to read more before deciding",
+            "text": "Click the ad to read a little more before deciding",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Start with $350 to test it",
+            "text": "Start with only $350 to see if it really works",
             "correct": false
           }
         ]
@@ -1245,17 +1231,17 @@
         "options": [
           {
             "id": "a",
-            "text": "A famous person promising guaranteed returns from a \"federal program\"",
+            "text": "Guaranteed returns from a \"federal program\"",
             "correct": true
           },
           {
             "id": "b",
-            "text": "He is speaking at a podium",
+            "text": "He's a well-known economist speaking at a podium",
             "correct": false
           },
           {
             "id": "c",
-            "text": "He is called an economist",
+            "text": "The ad shows the website name in the caption",
             "correct": false
           }
         ]
@@ -1265,17 +1251,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Don't click. Check the firm at aretheyregistered.ca and any program on canada.ca",
+            "text": "Don't click; check the firm at aretheyregistered.ca",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Click to read more before deciding",
+            "text": "Click the ad to read a little more before deciding",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Start with $250 to test it",
+            "text": "Start with only $250 to see if it really works",
             "correct": false
           }
         ]
@@ -1319,17 +1305,17 @@
         "options": [
           {
             "id": "a",
-            "text": "No link, it asks only YES or NO, and it points you to the number on your own card",
+            "text": "No link, and it points to your card's number",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It shows the bank's name",
+            "text": "It shows the bank's name as the sender",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It gives the exact store and amount",
+            "text": "It names the exact store and purchase amount",
             "correct": false
           }
         ]
@@ -1339,17 +1325,17 @@
         "options": [
           {
             "id": "a",
-            "text": "Reply YES or NO, or call the number on the back of your card",
+            "text": "Reply YES or NO, or call the number on your card",
             "correct": true
           },
           {
             "id": "b",
-            "text": "Reply with your card number to confirm",
+            "text": "Reply with your full card number so they can check it",
             "correct": false
           },
           {
             "id": "c",
-            "text": "Ignore it, because banks never text",
+            "text": "Ignore it, because banks never send texts",
             "correct": false
           }
         ]
@@ -1390,17 +1376,17 @@
         "options": [
           {
             "id": "a",
-            "text": "No link, no payment and no personal details asked for",
+            "text": "No link, no payment and no personal details",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It names the dentist",
+            "text": "It names the dentist and the exact time",
             "correct": false
           },
           {
             "id": "c",
-            "text": "It says \"Reminder\"",
+            "text": "It has a STOP line, so it must be a real business",
             "correct": false
           }
         ]
@@ -1410,7 +1396,7 @@
         "options": [
           {
             "id": "a",
-            "text": "Reply C, or call the office number you already have",
+            "text": "Reply C, or call the office number you have",
             "correct": true
           },
           {
@@ -1420,7 +1406,7 @@
           },
           {
             "id": "c",
-            "text": "Ignore it, because all texts are scams",
+            "text": "Ignore it, because all texts could be scams",
             "correct": false
           }
         ]

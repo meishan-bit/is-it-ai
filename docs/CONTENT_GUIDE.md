@@ -18,7 +18,7 @@ All learning content lives in `/content` as JSON, separate from the code, so the
 **Changing a test item (S11-S20) after testing has started makes earlier pre/post results hard to compare. Tell Tiffany first.**
 
 ## What `validate:content` checks
-20 scenarios; 10 practice, 5 pre (Form A) and 5 post (Form B) in 5 matched pairs with the same tactic, verdict and format; 16 scams and 4 genuine messages;
+20 scenarios; 10 practice, 5 pre (Form A) and 5 post (Form B) in 5 matched pairs with the same tactic, verdict and format; 14 scams and 6 genuine messages, with 3 scams + 2 real in each test form;
 exactly 3 options and 1 correct answer per question; explanations of 60 words or fewer; every phone number in 555-01xx (except the real CAFC number in S05);
 no clickable links in scenario text; media file exists; images have alt text; audio has a transcript; AI-made media carries `ai_generated: true`;
 highlight phrases really appear in the text; glossary "what to do" of 30 words or fewer and at least one practice item per term; every tactic exists.
@@ -36,7 +36,7 @@ Same fields as the Week 1 content pack, with these differences:
 | Option `id` (new) | `a`, `b`, `c`. The correct option is stored first in the file; the app shuffles on screen |
 
 ## Differences from the Week 1 and Week 2 packs to confirm with Erika
-1. **Scam / real count.** Week 1 says "15 scams and 5 genuine", but its own scenario table (and Week 2) has 4 genuine messages (S04, S09, S19, S20) and 16 scams. The app follows the table.
+1. **Scam / real count.** The Week 3 doc's scope line says "13 scams and 7 real", but its own items have 6 real messages (S04, S09, S13, S14, S19, S20) and 14 scams. The app follows the items.
 2. **S07 wording.** The text said the camera "on the oil rig" was broken, but M1 is a sailboat photo. Changed to "on the boat". Revert in `scenarios.json` if you prefer.
 3. **AI label on S08 and S10.** Week 2 marks the label "No" for the voicemails. They use synthetic voices, and the proposal promises all AI-made examples are clearly labelled, so all four clips show "Made with AI for training".
 4. **Audio length labels.** The "0:20 / 0:25" in the sender lines was removed. The Play button shows the real length.

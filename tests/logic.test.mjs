@@ -117,7 +117,7 @@ test('track validation rejects bad input', () => {
 });
 
 test('analytics: pre/post change, completion and pair balance', () => {
-  const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form }));
+  const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form, verdict: s.verdict }));
   const mk = (id, anon, mode, form, done = true) => ({ attempt_id: id, anon_id: anon, mode, form, started_at: '2026-11-10T10:00:00Z', completed_at: done ? '2026-11-10T10:10:00Z' : null, app_version: '1.0.0', content_version: '1.0.0' });
   const attempts = [mk('a1', 'T1', 'pre', 'A'), mk('a2', 'T1', 'post', 'B'), mk('a3', 'T2', 'pre', 'B'), mk('a4', 'T2', 'post', 'A', false), mk('p1', 'u1', 'practice', null), mk('p2', 'u2', 'practice', null, false)];
   const resp = (att, sid, v, s) => ({ attempt_id: att, scenario_id: sid, verdict_correct: v, sign_correct: true, step_correct: s, time_ms: 10000 });
@@ -140,10 +140,34 @@ test('analytics: pre/post change, completion and pair balance', () => {
   const p1 = stats.pairs.find((p) => p.pair === 'P1');
   assert.equal(p1.status, 'too_few');
   assert.equal(stats.activity.length, 14);
+  // Week 3 split: form A = 3 scams + 2 real. T1 got every verdict right before and after.
+  const t1 = stats.testing.rows.find((r) => r.anon_id === 'T1');
+  assert.deepEqual(t1.pre_split, { scams_caught: 3, scams_total: 3, real_trusted: 2, real_total: 2 });
+  assert.equal(stats.testing.pre_scams_caught_pct, 100);
+  assert.equal(stats.testing.post_real_trusted_pct, 100);
+});
+
+test('Week 3 forms: 3 scams + 2 real each, 14 + 6 overall', () => {
+  for (const use of ['pre', 'post']) {
+    const f = scenarios.filter((s) => s.use === use);
+    assert.equal(f.filter((s) => s.verdict === 'scam').length, 3, use);
+    assert.equal(f.filter((s) => s.verdict === 'real').length, 2, use);
+  }
+  assert.equal(scenarios.filter((s) => s.verdict === 'real').length, 6);
+});
+
+test('an always-"scam" tester catches every scam but trusts no real message', () => {
+  const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form, verdict: s.verdict }));
+  const att = [{ attempt_id: 'x1', anon_id: 'T9', mode: 'pre', form: 'A', started_at: '2026-11-10T10:00:00Z', completed_at: '2026-11-10T10:10:00Z' }];
+  const rs = scenarios.filter((s) => s.form === 'A' && s.use === 'pre').map((s) => ({
+    attempt_id: 'x1', scenario_id: s.id, verdict_correct: s.verdict === 'scam', sign_correct: false, step_correct: false, time_ms: 1000,
+  }));
+  const row = aggregate([], att, rs, meta).testing.rows[0];
+  assert.deepEqual(row.pre_split, { scams_caught: 3, scams_total: 3, real_trusted: 0, real_total: 2 });
 });
 
 test('sample data produces a full, sane dashboard', () => {
-  const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form }));
+  const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form, verdict: s.verdict }));
   const d = buildSampleData(meta, new Date('2026-11-12T12:00:00Z'));
   const stats = aggregate(d.participants, d.attempts, d.responses, meta, new Date('2026-11-12T12:00:00Z'));
   assert.equal(stats.testing.testers, 5);

@@ -22,7 +22,7 @@ const words = (t) => t.trim().split(/\s+/).filter(Boolean);
 if (!/^\d+\.\d+\.\d+$/.test(meta.content_version)) err(`meta.json: content_version "${meta.content_version}" is not x.y.z`);
 if (meta.history?.[0]?.version !== meta.content_version) err('meta.json: first history entry must match content_version');
 
-// ---- overall scope (Week 1: 20 scenarios, 10 practice + 10 test in 5 pairs, 15 scams + 5 real)
+// ---- overall scope (Week 3 doc, Nov 16 revision: 20 scenarios, 10 practice + 10 test in 5 pairs, 14 scams + 6 real)
 const ids = scenarios.map((s) => s.id);
 if (new Set(ids).size !== ids.length) err('Duplicate scenario ids');
 if (scenarios.length !== 20) err(`Expected 20 scenarios, found ${scenarios.length}`);
@@ -30,8 +30,14 @@ const count = (f) => scenarios.filter(f).length;
 if (count((s) => s.use === 'practice') !== 10) err('Expected 10 practice scenarios');
 if (count((s) => s.use === 'pre') !== 5) err('Expected 5 pre-test (Form A) scenarios');
 if (count((s) => s.use === 'post') !== 5) err('Expected 5 post-test (Form B) scenarios');
-// NOTE: the Week 1 text says "15 scams + 5 genuine", but its own scenario table (and Week 2) has 16 scams + 4 genuine (S04, S09, S19, S20).
-if (count((s) => s.verdict === 'scam') !== 16 || count((s) => s.verdict === 'real') !== 4) err('Expected 16 scam + 4 real scenarios (see content/README note)');
+// NOTE: the Week 3 doc's scope line says "13 scams and 7 real", but its own items give 14 scams + 6 real
+// (real: S04, S09, S13, S14, S19, S20). The app follows the items.
+if (count((s) => s.verdict === 'scam') !== 14 || count((s) => s.verdict === 'real') !== 6) err('Expected 14 scam + 6 real scenarios (see docs/CONTENT_GUIDE.md)');
+// Each test form is 3 scams + 2 real, so answering "scam" every time cannot score well on the verdict.
+for (const use of ['pre', 'post']) {
+  const scams = count((s) => s.use === use && s.verdict === 'scam');
+  if (scams !== 3) err(`Expected 3 scams + 2 real in the ${use}-test form, found ${scams} scams`);
+}
 
 const PHONE = /(?:\+?1[\s-]?)?\(?(\d{3})\)?[\s.-]?(\d{3})[\s.-](\d{4})/g;
 const ALLOWED_REAL_NUMBERS = new Set(['8884958501']); // real CAFC number quoted in S05

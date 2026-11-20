@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import { TACTICS } from '@/lib/content';
-import type { AdminStats } from '@/lib/analytics';
+import type { AdminStats, VerdictSplit } from '@/lib/analytics';
 
 interface Payload {
   mode: 'live' | 'sample';
@@ -27,6 +27,12 @@ function Bar({ label, value, alt = false }: { label: string; value: number | nul
       <span>{value === null ? '-' : `${value}%`}</span>
     </div>
   );
+}
+
+/** "2/3" for one tester's verdict split, or "-" when that check is not finished. */
+function splitCell(sp: VerdictSplit | null, part: 'scams' | 'real'): string {
+  if (!sp) return '-';
+  return part === 'scams' ? `${sp.scams_caught}/${sp.scams_total}` : `${sp.real_trusted}/${sp.real_total}`;
 }
 
 export default function AdminDashboard() {
@@ -161,9 +167,9 @@ export default function AdminDashboard() {
         </p>
         <div className="tablewrap">
           <table>
-            <thead><tr><th>Tester</th><th>Order</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+            <thead><tr><th>Tester</th><th>Order</th><th>Before</th><th>After</th><th>Change</th><th>Scams caught (before → after)</th><th>Real trusted (before → after)</th></tr></thead>
             <tbody>
-              {t.rows.length === 0 && <tr><td colSpan={5}>No test sessions yet.</td></tr>}
+              {t.rows.length === 0 && <tr><td colSpan={7}>No test sessions yet.</td></tr>}
               {t.rows.map((r) => (
                 <tr key={r.anon_id}>
                   <td>{r.anon_id}</td>
@@ -171,6 +177,8 @@ export default function AdminDashboard() {
                   <td>{r.pre_points === null ? 'not finished' : `${r.pre_points}/${r.max}`}</td>
                   <td>{r.post_points === null ? 'not finished' : `${r.post_points}/${r.max}`}</td>
                   <td><strong>{signed(r.change_points, ' pts')}</strong></td>
+                  <td>{splitCell(r.pre_split, 'scams')} → {splitCell(r.post_split, 'scams')}</td>
+                  <td>{splitCell(r.pre_split, 'real')} → {splitCell(r.post_split, 'real')}</td>
                 </tr>
               ))}
             </tbody>
@@ -180,6 +188,12 @@ export default function AdminDashboard() {
           <div style={{ marginTop: 14 }}>
             <Bar label="Average before" value={t.avg_pre_pct} alt />
             <Bar label="Average after" value={t.avg_post_pct} />
+            <h3 style={{ margin: '16px 0 6px', fontSize: '1.1rem' }}>Real or scam, split by what the message really was</h3>
+            <p className="muted" style={{ marginTop: 0 }}>Someone who answers "scam" every time catches every scam but trusts no real message, so read the two together.</p>
+            <Bar label="Scams caught, before" value={t.pre_scams_caught_pct} alt />
+            <Bar label="Scams caught, after" value={t.post_scams_caught_pct} />
+            <Bar label="Real messages trusted, before" value={t.pre_real_trusted_pct} alt />
+            <Bar label="Real messages trusted, after" value={t.post_real_trusted_pct} />
           </div>
         )}
       </section>

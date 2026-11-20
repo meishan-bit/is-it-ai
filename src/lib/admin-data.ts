@@ -9,6 +9,7 @@ export const SCENARIO_META: ScenarioMeta[] = SCENARIOS.map((s) => ({
   tactic: s.tactic,
   pair_id: s.pair_id,
   form: s.form,
+  verdict: s.verdict,
 }));
 
 export interface AdminDataset {
