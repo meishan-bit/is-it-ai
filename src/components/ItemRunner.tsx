@@ -41,8 +41,8 @@ export default function ItemRunner({ scenario, index, total, mode, seed, isLast,
     return { sign: mix(scenario.sign_question.options, 'sign'), step: mix(scenario.step_question.options, 'step') };
   }, [scenario, mode, seed]);
 
-  // In a test, prompts are neutral so the wording of question 2 cannot give away the answer to question 1.
-  const signPrompt = mode === 'test' ? 'What is the most important clue?' : scenario.sign_question.prompt;
+  // Question 2 is neutral in practice and test alike, so its wording never contradicts or gives away question 1 (fix #2).
+  const signPrompt = 'What is the most important clue?';
   const stepPrompt = scenario.step_question.prompt;
 
   useEffect(() => {
