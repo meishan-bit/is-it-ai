@@ -3,6 +3,9 @@
 All notable changes to **Is It AI?**. The app version (package.json) and the content version (content/meta.json) are tracked separately.
 Format: [app x.y.z] for code, [content x.y.z] for scenarios, glossary and tactic guides.
 
+## [app 2.1.2] - 2026-11-21
+- Admin: time per part, seconds per question and practice time for each tester
+
 ## [app 2.1.1] - 2026-11-21
 - Check It photos: each picture is read twice and the words joined, so white text on a coloured bubble in dark mode (a blue reply bubble was skipped in the Nov 21 phone test) and dark text on a pale bubble are both read. Name finder: names whose surname is also a word (Susan Park) are hidden; Bill, Mark, Chase, May and business names (Chase Bank, Canada Post) are not treated as names.
 
