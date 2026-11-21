@@ -1,0 +1,184 @@
+{
+  "version": "1.0.0",
+  "notes": "Copy for Check It, from the Check It Build Brief (Nov 20) and the Workflow Screens. Phone numbers are NANPA fictional (555-0100 to 555-0199). Keep every number in this file as (613) 555-0142 until the team picks a real line.",
+  "sample_number": {
+    "display": "(613) 555-0142",
+    "tel": "tel:+16135550142"
+  },
+  "talk": {
+    "heading": "Talk to a person",
+    "button": "Call (613) 555-0142",
+    "note": "Sample number for this student project. In real use, this would call the Canadian Anti-Fraud Centre, Monday to Friday, 10 a.m. to 4:45 p.m. Eastern.",
+    "hours_to_confirm": true
+  },
+  "report": {
+    "heading": "Report it",
+    "button": "Call (613) 555-0142",
+    "note": "Sample number for this student project. In real use, this would call the Canadian Anti-Fraud Centre."
+  },
+  "general_step": {
+    "text": "Don't reply, click or pay. Contact the person or company using a number or website you already know.",
+    "vetted": false
+  },
+  "still_personal": "Some personal details may still show. We didn't keep them.",
+  "learn": {
+    "T1": "grandparent-scam",
+    "T2": "spoofing",
+    "T3": "phishing",
+    "T4": "phishing",
+    "T5": "phishing",
+    "T6": "tech-support-scam",
+    "T7": "deepfake",
+    "T8": "deepfake",
+    "T9": "voice-clone",
+    "T10": "spoofing"
+  },
+  "levels": {
+    "strong": {
+      "heading": "Strong warning signs",
+      "body_known": "This looks like a common scam: {tactic}.",
+      "body_unknown": "This looks like a common scam."
+    },
+    "some": {
+      "heading": "Some warning signs",
+      "body": "Some parts of this are often used in scams."
+    },
+    "none_found": {
+      "heading": "No common warning signs found",
+      "body": "That doesn't prove it's genuine. If it asks for money or details, check first."
+    }
+  },
+  "screens": {
+    "home_heading": "Got a message right now?",
+    "home_button": "Check a message I got",
+    "home_note": "See if a text, email or call looks like a scam",
+    "finished_line": "Got a real message you're unsure about?",
+    "finished_button": "Check a message I got",
+    "locked_heading": "Check It opens after your test session",
+    "locked_body": "Check It opens after your test session. You can still talk to a person.",
+    "choose_heading": "What did you get?",
+    "choose_privacy": "Personal details are hidden on your phone before anything is sent.",
+    "photo_button": "A photo or screenshot",
+    "photo_note": "Of a text, email or letter",
+    "paste_button": "A message I can copy",
+    "paste_note": "From a text or email",
+    "call_button": "A phone call",
+    "call_note": "Answer a few questions about it",
+    "photo_heading": "Pick the picture",
+    "photo_help": "Show just the message, one screen at a time. A closer picture reads best.",
+    "photo_choose": "Choose a photo",
+    "photo_take": "Take a photo",
+    "paste_heading": "Paste the message",
+    "paste_help": "Copy the message first, then tap Paste from my phone. Your phone may ask you to tap Paste.",
+    "paste_button_label": "Paste from my phone",
+    "paste_fallback": "Paste the message here",
+    "paste_next": "Next",
+    "paste_too_long": "That message is long. Please copy just the part that worries you.",
+    "ready_heading": "Getting ready",
+    "ready_body": "Getting ready. This can take a few minutes the first time. Next time it will be quicker.",
+    "ready_slow": "Still working. You can also describe it instead.",
+    "hiding_heading": "Hiding personal details on your phone",
+    "review_heading": "Check what we hid",
+    "review_help": "Black boxes hide personal details. Tap any word to hide it or show it.",
+    "review_help_text": "Words in square brackets are hidden. Tap any word to hide it or show it.",
+    "review_group_auto": "We hid these",
+    "review_group_rest": "Tap any word to hide it too",
+    "chip_hidden": "Hidden",
+    "chip_showing": "Showing",
+    "confirm_show": "Show this detail? It will be sent to be checked.",
+    "confirm_show_yes": "Show it",
+    "confirm_show_no": "Keep it hidden",
+    "send_button": "Send to check",
+    "send_note": "A copy of your message with personal details hidden is sent to Anthropic's Claude to be checked. It is not stored by us.",
+    "checking_heading": "Checking the message",
+    "result_button": "What should I do?",
+    "todo_heading": "What to do",
+    "again_button": "Check another message",
+    "home_back_button": "Back to Home",
+    "call_heading": "Describe the call",
+    "call_progress": "Question {n} of {total}",
+    "call_stop_confirm": "Leave? Your answers won't be kept.",
+    "call_stop_leave": "Leave",
+    "call_stop_stay": "Stay",
+    "answer_yes": "Yes",
+    "answer_no": "No",
+    "answer_not_sure": "Not sure",
+    "back": "Back",
+    "review_none_auto": "We didn't find personal details to hide. Please look through the words below.",
+    "review_count": "{n} hidden"
+  },
+  "errors": {
+    "unreadable": {
+      "heading": "We couldn't read the picture",
+      "body": "We couldn't read the words in this picture. A clearer or closer photo may help.",
+      "primary": "Try another picture",
+      "secondary": "Describe it instead"
+    },
+    "offline": {
+      "heading": "No connection",
+      "body": "Your phone isn't connected to the internet right now. Nothing was sent.",
+      "primary": "Try again"
+    },
+    "too_many": {
+      "heading": "Too many checks today",
+      "body": "You've done a lot of checks today. Please try again tomorrow, or talk to a person now.",
+      "primary": "Talk to a person",
+      "secondary": "Back to Home"
+    },
+    "wrong": {
+      "heading": "Something went wrong",
+      "body": "Something went wrong on our side. Nothing was kept.",
+      "primary": "Try again",
+      "secondary": "Back to Home"
+    }
+  },
+  "call_questions": [
+    {
+      "key": "family_trouble",
+      "text": "Did the caller say someone in your family is in trouble or hurt?",
+      "points_to": [
+        "T1",
+        "T9"
+      ]
+    },
+    {
+      "key": "official_caller",
+      "text": "Did they say they were from your bank, the police or the government?",
+      "points_to": [
+        "T2",
+        "T10"
+      ]
+    },
+    {
+      "key": "asked_payment",
+      "text": "Did they ask you to pay, send money, or buy gift cards?",
+      "points_to": [
+        "T1",
+        "T2",
+        "T9"
+      ]
+    },
+    {
+      "key": "secret_or_stay",
+      "text": "Did they tell you to keep it secret or stay on the line?",
+      "points_to": [
+        "T1",
+        "T9"
+      ]
+    },
+    {
+      "key": "remote_access",
+      "text": "Did they ask to connect to your computer or phone?",
+      "points_to": [
+        "T6"
+      ]
+    },
+    {
+      "key": "money_back",
+      "text": "Did they offer to get back money you lost, for a fee?",
+      "points_to": [
+        "T10"
+      ]
+    }
+  ]
+}

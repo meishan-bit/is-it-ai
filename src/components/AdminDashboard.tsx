@@ -129,6 +129,7 @@ export default function AdminDashboard() {
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <button type="button" className="btn btn-secondary" onClick={() => { setView('loading'); void load(); }}>Refresh</button>
           <a className="btn btn-secondary" href="/api/admin/export">Download responses (CSV)</a>
+          <Link className="btn btn-secondary" href="/admin/check">Check It results</Link>
           <button type="button" className="btn btn-quiet" onClick={logout}>Sign out</button>
         </div>
       </div>
