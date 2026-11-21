@@ -3,6 +3,9 @@
 All notable changes to **Is It AI?**. The app version (package.json) and the content version (content/meta.json) are tracked separately.
 Format: [app x.y.z] for code, [content x.y.z] for scenarios, glossary and tactic guides.
 
+## [app 2.1.0] - 2026-11-21
+- Check It: PR #1 port. A name finder (compromise, about 150 KB, on the phone) now runs on photos and pasted text, so names with no cue word are hidden. PR #1's rules added: wrapped link codes, Alberta health numbers, 3+3 and verification codes, card expiry right after a card, health-card labels. PR #1's tests and licences added. image-pii-redactor and its 279 MB model are not used.
+
 ## [content 2.2.1] - 2026-11-21
 - Check It choose screen: heading "What did you get?" is now "What do you want to check?" (content/check.json 1.0.1). Read-aloud text uses the same string. Scenarios, glossary, tactics and test forms unchanged.
 

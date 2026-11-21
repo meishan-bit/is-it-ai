@@ -1,4 +1,5 @@
 import type { Box, OcrWord, Span } from './types';
+import { findNames, loadNameFinder } from './names';
 
 /**
  * The photo reader. Everything runs on the phone: the picture is read here and never sent for reading.
@@ -106,7 +107,7 @@ type TessModule = {
 
 /**
  * Built-in reader: Tesseract.js (OCR) in the browser. It finds the words and their boxes; the Canadian rules in
- * ca-patterns.ts decide which to hide. It has no name finder, so names are caught by the rules' cues and by the review.
+ * ca-patterns.ts decide which to hide, and names.ts (compromise) finds names. The person reviews everything before it is sent.
  * The language data downloads once from a public CDN (nothing about the picture is sent there).
  */
 function createTesseractEngine(): PhotoEngine {
@@ -115,6 +116,7 @@ function createTesseractEngine(): PhotoEngine {
     isReady: () => worker !== null,
     async warmUp(onProgress) {
       if (worker) return;
+      void loadNameFinder().catch(() => undefined); // small, loads alongside the reader; failure only means fewer names found
       const mod = (await import('tesseract.js')) as unknown as TessModule;
       worker = await mod.createWorker('eng', 1, {
         logger: (m) => onProgress?.({ stage: plainStage(m.status), percent: Number.isFinite(m.progress) ? Math.round(m.progress * 100) : null }),
@@ -126,6 +128,7 @@ function createTesseractEngine(): PhotoEngine {
       const res = await worker.recognize(source);
       return assignLines((res.data.words ?? []).map((w) => ({ text: w.text, bbox: { x0: w.bbox.x0, y0: w.bbox.y0, x1: w.bbox.x1, y1: w.bbox.y1 } })));
     },
+    detectNames: (text) => findNames(text),
     async dispose() {
       const w = worker;
       worker = null;

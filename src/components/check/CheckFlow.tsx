@@ -13,6 +13,7 @@ import { chipStats, chipsFromText, chipsFromWords, hiddenBoxes, maskedText, togg
 import { findCanadianPii } from '@/lib/check/ca-patterns';
 import { postCheck } from '@/lib/check/client';
 import { getPhotoEngine, subscribeProgress, warmUpPhotoEngine, type EngineProgress } from '@/lib/check/engine';
+import { dropStatusBar, findNames } from '@/lib/check/names';
 import { MAX_TEXT_CHARS } from '@/lib/check/request';
 import { MAX_FILE_BYTES, clearCanvas, drawRedacted, fileToCanvas, redactedPngBase64 } from '@/lib/check/render';
 import { CALL_KEYS, type CallAnswer, type CallKey, type CheckResult, type Span } from '@/lib/check/types';
@@ -31,6 +32,7 @@ export default function CheckFlow() {
   const [screen, setScreen] = useState<Screen>('choose');
   const [mode, setMode] = useState<Mode>('photo');
   const [callIdx, setCallIdx] = useState(0);
+  const [findingNames, setFindingNames] = useState(false);
   const [answers, setAnswers] = useState<Partial<Record<CallKey, CallAnswer>>>({});
   const [leaveAsk, setLeaveAsk] = useState(false);
   const [pasteText, setPasteText] = useState('');
@@ -119,7 +121,7 @@ export default function CheckFlow() {
       let extra: Span[] = [];
       if (engine.detectNames) {
         try {
-          extra = await engine.detectNames(text);
+          extra = dropStatusBar(await engine.detectNames(text), words, canvas.width, canvas.height);
         } catch {
           extra = [];
         }
@@ -162,10 +164,15 @@ export default function CheckFlow() {
     }
   }
 
-  function pasteNext() {
+  async function pasteNext() {
     if (pasteText.length > MAX_TEXT_CHARS) return setTooLong(true);
+    if (findingNames) return;
+    setFindingNames(true);
+    const names = await findNames(pasteText); // never throws; [] if the name finder cannot load
+    setFindingNames(false);
+    if (!alive.current) return;
     setMode('paste');
-    setChips(chipsFromText(pasteText, findCanadianPii(pasteText)));
+    setChips(chipsFromText(pasteText, findCanadianPii(pasteText, names)));
     setScreen('review');
   }
 
@@ -301,7 +308,7 @@ export default function CheckFlow() {
         )}
         {tooLong && <p className="error-text" role="alert">{S.paste_too_long}</p>}
         <div className="btn-row">
-          <button type="button" className="btn" disabled={!pasteText.trim()} onClick={pasteNext}>{S.paste_next}</button>
+          <button type="button" className="btn" disabled={!pasteText.trim() || findingNames} onClick={pasteNext}>{S.paste_next}</button>
           <button type="button" className="btn btn-quiet" onClick={() => setScreen('choose')}>{S.back}</button>
         </div>
       </>

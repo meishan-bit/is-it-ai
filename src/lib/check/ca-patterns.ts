@@ -12,8 +12,10 @@ import type { Span } from './types';
  * link domains and email domains.
  *
  * No look-behind in any pattern: older iPhones (before iOS 16.4) cannot even load a file that contains one.
- * Written for this project from the rule list in the Check It Build Brief. The team's tested rules in PR #1 (ca-patterns.ts, adapted
- * from Presidio, canpii and wuming) can replace this file: keep the findCanadianPii(text, extra) signature. See docs/CHECK_IT.md.
+ * Written for this project from the rule list in the Check It Build Brief, then merged with the team's tested rules from PR #1
+ * (wrapped link codes, Alberta health numbers, 3+3 and "verification" codes, card expiry right after a card, health-card labels).
+ * PR #1's rules adapt patterns from Microsoft Presidio (MIT), canpii (Apache-2.0) and wuming (MIT): see THIRD_PARTY_NOTICES.md.
+ * They are rewritten here without look-behind.
  */
 
 const MONTH = '(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)';
@@ -50,21 +52,39 @@ function digitsIn(s: string): number {
   return s.replace(/\D/g, '').length;
 }
 
+/** Words that mark a nearby number as a health card number, and words that mark it as a SIN. From PR #1. */
+const HEALTH_CONTEXT = /\b(?:health|sant[ée]|carte|hsn|phn|ohip|ramq|ahcip|msp)\b|\bhealth card\b/i;
+const SIN_CONTEXT = /\b(?:sin|s\.i\.n|social insurance|nas|assurance sociale)\b/i;
+const before = (text: string, index: number, size: number): string => text.slice(Math.max(0, index - size), index);
+const idLabel = (text: string, start: number): string =>
+  !SIN_CONTEXT.test(before(text, start, 40)) && HEALTH_CONTEXT.test(before(text, start, 40)) ? 'health card number' : 'id number';
+
+/**
+ * Card numbers: 13 to 19 digits, spaces or dashes allowed. Every such number is hidden, valid or not, because a photo may misread a digit.
+ * "4111111111111111 08/28": the expiry month after the card is not swallowed into it.
+ */
+function findCards(text: string): Span[] {
+  const out: Span[] = [];
+  each(/\d(?:[ -]?\d){12,18}/g, text, (m) => {
+    let s = m[0];
+    if (text[m.index + s.length] === '/') {
+      const cut = Math.max(s.lastIndexOf(' '), s.lastIndexOf('-'));
+      if (cut > 0) s = s.slice(0, cut);
+    }
+    const end = m.index + s.length;
+    const n = digitsIn(s);
+    if (n >= 13 && n <= 19 && standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: 'card number' });
+  });
+  return out;
+}
+
 type Rule = { priority: number; find: (text: string) => Span[] };
 
 /** Priority: lower wins when two rules find overlapping text (a card number beats a phone-looking part of it). */
 const RULES: Rule[] = [
   {
     priority: 1,
-    find(text) {
-      const out: Span[] = [];
-      each(/\d(?:[ -]?\d){12,18}/g, text, (m) => {
-        const end = m.index + m[0].length;
-        const n = digitsIn(m[0]);
-        if (n >= 13 && n <= 19 && standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: 'card number' });
-      });
-      return out;
-    },
+    find: findCards,
   },
   {
     priority: 2,
@@ -86,6 +106,15 @@ const RULES: Rule[] = [
         const end = m.index + m[0].length;
         out.push({ start: end - m[1].length, end, label: 'card expiry' });
       });
+      // No label, but right after a card number ("4111 1111 1111 1111 08/28"). From PR #1.
+      const cardEnds = findCards(text).map((c) => c.end);
+      each(/(?:0?[1-9]|1[0-2])\s?\/\s?(?:\d{4}|\d{2})(?![\d/])/g, text, (m) => {
+        const prev = text[m.index - 1];
+        if (isDigit(prev) || prev === '/') return;
+        if (cardEnds.some((e) => m.index >= e && m.index - e <= 20 && !/[A-Za-z]{4}/.test(text.slice(e, m.index)))) {
+          out.push({ start: m.index, end: m.index + m[0].length, label: 'card expiry' });
+        }
+      });
       return out;
     },
   },
@@ -96,18 +125,18 @@ const RULES: Rule[] = [
       const out: Span[] = [];
       each(/\d{3}[ -]\d{3}[ -]\d{3}(?![ -]?\d)/g, text, (m) => {
         const end = m.index + m[0].length;
-        if (standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: 'id number' });
+        if (standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: idLabel(text, m.index) });
       });
       each(/\d{9}/g, text, (m) => {
         const end = m.index + 9;
-        if (standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: 'id number' });
+        if (standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: idLabel(text, m.index) });
       });
       return out;
     },
   },
   {
     // Provincial health numbers: Ontario / Nova Scotia (4-3-3 with optional version letters), BC (10 digits starting with 9),
-    // Quebec (4 letters + 8 digits).
+    // Alberta (5-4, from PR #1), Quebec (4 letters + 8 digits).
     priority: 5,
     find(text) {
       const out: Span[] = [];
@@ -122,6 +151,10 @@ const RULES: Rule[] = [
       each(/9\d{9}/g, text, (m) => {
         const end = m.index + 10;
         if (standaloneNumber(text, m.index, end)) out.push({ start: m.index, end, label: 'health card number' });
+      });
+      each(/\d{5}-\d{4}/g, text, (m) => {
+        const end = m.index + m[0].length;
+        if (standaloneNumber(text, m.index, end) && !isAlnum(text[end])) out.push({ start: m.index, end, label: idLabel(text, m.index) });
       });
       each(/[A-Z]{4}[ -]?\d{4}[ -]?\d{4}/g, text, (m) => {
         const end = m.index + m[0].length;
@@ -154,13 +187,14 @@ const RULES: Rule[] = [
     },
   },
   {
-    // "Your code is 482913", "PIN 1234", "one-time passcode: 556677". Only the digits are hidden.
+    // "Your code is 482913", "PIN 1234", "one-time passcode: 556677", "verification number: 556 677". Only the digits are hidden.
     priority: 8,
     find(text) {
       const out: Span[] = [];
-      each(/\b(?:code|pin|passcode|otp)\b[^\d\n]{0,15}?(\d{4,8})(?!\d)/gi, text, (m) => {
+      each(/\b(?:code|pin|passcode|password|otp|verification|verify)\b[^\d\n]{0,15}?(\d{3}[ -]\d{3}|\d{4,8})(?![ -]?\d)/gi, text, (m) => {
         const end = m.index + m[0].length;
-        out.push({ start: end - m[1].length, end, label: 'code or pin' });
+        const start = end - m[1].length;
+        if (standaloneNumber(text, start, end)) out.push({ start, end, label: 'code or pin' });
       });
       return out;
     },
@@ -188,6 +222,16 @@ const RULES: Rule[] = [
         const end = m.index + m[0].length - (m[1].length - tail.length);
         if (text[m.index - 1] === '@') return;
         out.push({ start: end - tail.length, end, label: 'link code' });
+      });
+      // A link that wrapped onto the next line: the next line starts with the rest of it ("...claim?ref=G" / "F0464"). From PR #1.
+      each(/(?:https?:\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,24}([/?#][^\s]*)?\n([^\s]{1,60})/gi, text, (m) => {
+        if (text[m.index - 1] === '@') return;
+        const token = m[2].replace(/[.,;:!)\]'"\u201d\u2019]+$/, '');
+        const startsLikeTail = /^[?#&=/]/.test(token);
+        const looksLikeCode = Boolean(m[1]) && /\d/.test(token) && /^[A-Za-z0-9=&%_\-./?#]+$/.test(token);
+        if (!token || !(startsLikeTail || looksLikeCode)) return;
+        const start = m.index + m[0].length - m[2].length;
+        out.push({ start, end: start + token.length, label: 'link code' });
       });
       return out;
     },
@@ -248,6 +292,19 @@ function findLikelyNames(text: string): Span[] {
   each(new RegExp(`\\b(?:Hi|Hello|Hey|Dear|Good (?:morning|afternoon|evening)),?\\s+(${NAME}(?:\\s+${NAME})?)`, 'g'), text, push);
   each(new RegExp(`\\b(?:[Mm]y name is|I am|I'm|I\u2019m)\\s+(${NAME}(?:\\s+${NAME})?)`, 'g'), text, push);
   each(new RegExp(`\\b(?:Thanks|Thank you|Regards|Sincerely|Best|Love|Cheers|Yours)[,.]?[ \\t]*[\\r\\n]+[ \\t]*(${NAME}(?:\\s+${NAME})?)`, 'g'), text, push);
+  return out;
+}
+
+/**
+ * Parts that must stay visible because they are scam clues: link domains and email domains.
+ * The name finder's results are dropped where they touch one (it sometimes calls "MapleTrust.ca" a name).
+ */
+export function findKeepZones(text: string): Array<{ start: number; end: number }> {
+  const out: Array<{ start: number; end: number }> = [];
+  each(/@([A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, text, (m) => out.push({ start: m.index + 1, end: m.index + m[0].length }));
+  each(/(?:https?:\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,24}\b/gi, text, (m) => {
+    if (text[m.index - 1] !== '@') out.push({ start: m.index, end: m.index + m[0].length });
+  });
   return out;
 }
 
