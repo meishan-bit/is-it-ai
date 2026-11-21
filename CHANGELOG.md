@@ -3,6 +3,16 @@
 All notable changes to **Is It AI?**. The app version (package.json) and the content version (content/meta.json) are tracked separately.
 Format: [app x.y.z] for code, [content x.y.z] for scenarios, glossary and tactic guides.
 
+## [app 2.0.0] - 2026-11-21
+- Check It: check a message you got, from a photo or screenshot, a pasted message, or answers about a phone call. Personal details are hidden on the phone and reviewed with tap-to-hide chips before anything is sent. The result counts warning signs, never says safe, and always ends with a vetted next step, Report it and Talk to a person (sample number (613) 555-0142).
+- Check It is last on Home under "Got a message right now?" and has one link on the practice Finished screen. It is hidden during test sessions; /check shows a locked screen instead.
+- /api/check (Claude, structured outputs; the server writes the safe step from tactics.json), rate limits (10 per person and 300 overall per day), check_events table (counts and outcomes only), Check It results page in the admin.
+- Nine Canadian redaction rules (ID numbers, postal codes, health cards, phone numbers, cards, codes and PINs, email names, link codes, birth dates), plus helpers for names and addresses, with unit tests.
+- Version management: app 2.0.0. Existing screens, content, test forms and data are unchanged.
+
+## [content 2.2.0] - 2026-11-21
+- content/check.json added: Check It copy, errors, six call questions, learn links, the sample phone number. Scenarios, glossary and tactics unchanged.
+
 ## [app 1.1.1] - 2026-11-20
 - My progress: the CAFC phone number is replaced with the sample number (613) 555-0142, labelled as standing in for the Canadian Anti-Fraud Centre in real use.
 

@@ -1,8 +1,13 @@
 {
-  "content_version": "2.1.0",
-  "updated": "2026-11-20",
+  "content_version": "2.2.0",
+  "updated": "2026-11-21",
   "notes": "Bump content_version when any file in /content changes (patch = typo, minor = new or changed item, major = test forms change). Test-form changes invalidate comparisons with earlier results.",
   "history": [
+    {
+      "version": "2.2.0",
+      "date": "2026-11-21",
+      "summary": "Check It copy and settings added (content/check.json): screens, errors, call questions, learn links. Scenarios, glossary and tactics are unchanged; test forms unchanged."
+    },
     {
       "version": "2.1.0",
       "date": "2026-11-20",

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ItemRunner from './ItemRunner';
 import ScreenHeader from './ScreenHeader';
+import CheckEntry from './check/CheckEntry';
 import { PRACTICE_POOL, getTactic } from '@/lib/content';
 import { shuffle } from '@/lib/rng';
 import { isExampleRight } from '@/lib/scoring';
@@ -103,6 +104,7 @@ export default function PracticeFlow() {
           </button>
           <Link href="/progress" className="btn btn-secondary">See my progress</Link>
         </div>
+        <CheckEntry variant="finished" />
       </div>
     );
   }

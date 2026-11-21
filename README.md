@@ -120,3 +120,9 @@ Scoring (Week 1): 1 point for real-or-scam plus 1 for the safe step, per example
 - The browser voice used by "Listen" differs by phone. Check it on the testers' devices.
 - The Google Fonts request for Atkinson Hyperlegible Next means a third-party call; self-host the font if that matters.
 - The admin page reads the whole database on each load. That is fine for a class project, not for thousands of testers.
+
+## Check It (v2.0)
+
+Check It lets someone check a message they got: a photo or screenshot, a pasted message, or answers about a phone call.
+Setup (one database table, one API key), how it works, privacy rules and the sign-off checklist are in `docs/CHECK_IT.md`.
+Upgrading from v1.1: `docs/V2_UPGRADE.md`.

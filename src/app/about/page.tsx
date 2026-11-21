@@ -29,6 +29,7 @@ export default function Page() {
           <li>No names, emails or phone numbers are asked for or saved.</li>
           <li>Your answers are saved on your own device so you can see your progress.</li>
           <li>They may also be sent to the project database under a random code (or the session code from your helper), with how long each answer took and the kind of device you use (phone, tablet or computer).</li>
+          <li>If you use Check a message I got, personal details are hidden on your phone first. A copy of your message with those details hidden is then sent to Anthropic's Claude to be checked. It is not stored by us, and the pictures, text and answers are never kept. We only count that a check happened.</li>
           <li>Research sessions are run with your consent.</li>
         </ul>
       </div>

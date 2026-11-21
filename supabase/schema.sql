@@ -53,3 +53,27 @@ alter table responses    enable row level security;
 grant select, insert, update on participants, attempts, responses to service_role;
 grant usage, select on sequence responses_id_seq to service_role;
 revoke all on participants, attempts, responses from anon, authenticated;
+
+-- Check It (v2.0): one row for every check. Counts and outcomes only, never the message, picture or answers.
+-- Run in the Supabase SQL editor before deploying v2.0. Safe to run more than once.
+create table if not exists check_events (
+  id               bigserial primary key,
+  created_at       timestamptz not null default now(),
+  anon_id          text not null references participants(anon_id),
+  input_type       text not null check (input_type in ('photo','paste','call')),
+  tactic_id        text check (tactic_id in ('T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','real','unknown')),
+  signal_level     text check (signal_level in ('strong','some','none_found')),
+  outcome          text not null check (outcome in ('ok','timeout','rate_limited','model_error','invalid_output')),
+  redaction_counts jsonb not null default '{}'::jsonb,  -- e.g. {"card number":1,"name":2}: counts only
+  user_unhid_count integer not null default 0 check (user_unhid_count >= 0),
+  user_added_count integer not null default 0 check (user_added_count >= 0),
+  still_personal   boolean,
+  model            text not null,
+  latency_ms       integer check (latency_ms >= 0),
+  content_version  text not null
+);
+create index if not exists check_events_anon_day_idx on check_events (anon_id, created_at);
+alter table check_events enable row level security;
+grant select, insert on check_events to service_role;
+grant usage, select on sequence check_events_id_seq to service_role;
+revoke all on check_events from anon, authenticated;
