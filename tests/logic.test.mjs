@@ -166,6 +166,27 @@ test('an always-"scam" tester catches every scam but trusts no real message', ()
   assert.deepEqual(row.pre_split, { scams_caught: 3, scams_total: 3, real_trusted: 0, real_total: 2 });
 });
 
+test('tester rows carry part times, seconds per question and practice time', () => {
+  const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form, verdict: s.verdict }));
+  const att = [
+    { attempt_id: 'p1', anon_id: 'T5', mode: 'pre', form: 'A', started_at: '2026-11-10T10:00:00Z', completed_at: '2026-11-10T10:03:04Z' },
+    { attempt_id: 'r1', anon_id: 'T5', mode: 'practice', form: null, started_at: '2026-11-10T10:04:00Z', completed_at: '2026-11-10T10:06:30Z' },
+    { attempt_id: 'r2', anon_id: 'T5', mode: 'practice', form: null, started_at: '2026-11-10T10:07:00Z', completed_at: '2026-11-10T10:09:00Z' },
+    { attempt_id: 'r3', anon_id: 'T5', mode: 'practice', form: null, started_at: '2026-11-10T10:09:30Z', completed_at: null },
+    { attempt_id: 'q1', anon_id: 'T5', mode: 'post', form: 'B', started_at: '2026-11-10T10:10:00Z', completed_at: null },
+  ];
+  const rs = scenarios.filter((s) => s.form === 'A' && s.use === 'pre').map((s, i) => ({
+    attempt_id: 'p1', scenario_id: s.id, verdict_correct: true, sign_correct: false, step_correct: true, time_ms: (i + 1) * 10000,
+  }));
+  const row = aggregate([], att, rs, meta).testing.rows[0];
+  assert.equal(row.pre_seconds, 184);
+  assert.equal(row.pre_avg_q_seconds, 30);
+  assert.equal(row.post_seconds, null, 'an unfinished part has no time');
+  assert.equal(row.post_avg_q_seconds, null);
+  assert.equal(row.practice_rounds, 2, 'only finished practice rounds count');
+  assert.equal(row.practice_seconds, 270);
+});
+
 test('sample data produces a full, sane dashboard', () => {
   const meta = scenarios.map((s) => ({ id: s.id, use: s.use, tactic: s.tactic, pair_id: s.pair_id, form: s.form, verdict: s.verdict }));
   const d = buildSampleData(meta, new Date('2026-11-12T12:00:00Z'));

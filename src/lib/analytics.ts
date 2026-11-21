@@ -53,6 +53,17 @@ const pct = (num: number, den: number) => (den === 0 ? null : r1((num / den) * 1
 const mean = (xs: number[]) => (xs.length === 0 ? null : r1(xs.reduce((a, b) => a + b, 0) / xs.length));
 const points = (rs: ResponseRow[]) => rs.reduce((s, r) => s + (r.verdict_correct ? 1 : 0) + (r.step_correct ? 1 : 0), 0);
 const isTestCode = (id: string) => /^T\d+$/.test(id);
+/** Seconds from start to finish of an attempt, or null if it has no finish time. */
+const attemptSeconds = (a: AttemptRow | undefined): number | null => {
+  if (!a || !a.completed_at) return null;
+  const ms = Date.parse(a.completed_at) - Date.parse(a.started_at);
+  return Number.isFinite(ms) && ms >= 0 ? r1(ms / 1000) : null;
+};
+/** Average answer time in seconds over the responses that carry a time. */
+const avgAnswerSeconds = (rs: ResponseRow[]): number | null => {
+  const ts = rs.map((r) => r.time_ms).filter((t): t is number => typeof t === 'number');
+  return ts.length ? r1(ts.reduce((a, b) => a + b, 0) / ts.length / 1000) : null;
+};
 
 function verdictSplit(rs: ResponseRow[], verdictOf: (id: string) => 'scam' | 'real' | undefined): VerdictSplit {
   const out: VerdictSplit = { scams_caught: 0, scams_total: 0, real_trusted: 0, real_total: 0 };
@@ -86,6 +97,15 @@ export interface TesterRow {
   change_pp: number | null;
   pre_split: VerdictSplit | null;
   post_split: VerdictSplit | null;
+  /** Whole part, start to finish, in seconds (null when not finished). Includes reading, listening and any interruptions. */
+  pre_seconds: number | null;
+  post_seconds: number | null;
+  /** Average seconds per question in that part (null when no timed answers). */
+  pre_avg_q_seconds: number | null;
+  post_avg_q_seconds: number | null;
+  /** Finished practice rounds saved under this code, and their total time in seconds. */
+  practice_rounds: number;
+  practice_seconds: number | null;
 }
 
 export interface AdminStats {
@@ -201,6 +221,8 @@ export function aggregate(
     const prePts = pre ? points(preR) : null;
     const postPts = post ? points(postR) : null;
     const max = Math.max(preR.length, postR.length, 5) * 2;
+    const myPractice = practiceAttempts.filter((a) => a.anon_id === id && a.completed_at);
+    const practiceSecs = myPractice.map(attemptSeconds).filter((x): x is number => x !== null);
     rows.push({
       anon_id: id,
       pre_form: pre?.form ?? null,
@@ -212,6 +234,12 @@ export function aggregate(
       change_pp: prePts !== null && postPts !== null ? r1(((postPts - prePts) / max) * 100) : null,
       pre_split: pre ? verdictSplit(preR, verdictOf) : null,
       post_split: post ? verdictSplit(postR, verdictOf) : null,
+      pre_seconds: attemptSeconds(pre),
+      post_seconds: attemptSeconds(post),
+      pre_avg_q_seconds: pre ? avgAnswerSeconds(preR) : null,
+      post_avg_q_seconds: post ? avgAnswerSeconds(postR) : null,
+      practice_rounds: myPractice.length,
+      practice_seconds: practiceSecs.length ? r1(practiceSecs.reduce((a, b) => a + b, 0)) : null,
     });
   }
   const both = rows.filter((r) => r.pre_points !== null && r.post_points !== null);

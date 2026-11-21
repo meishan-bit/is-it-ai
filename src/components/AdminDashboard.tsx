@@ -29,6 +29,13 @@ function Bar({ label, value, alt = false }: { label: string; value: number | nul
   );
 }
 
+/** 184 seconds → "3:04"; null → "-". */
+function mmss(sec: number | null): string {
+  if (sec === null) return '-';
+  const t = Math.round(sec);
+  return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+}
+
 /** "2/3" for one tester's verdict split, or "-" when that check is not finished. */
 function splitCell(sp: VerdictSplit | null, part: 'scams' | 'real'): string {
   if (!sp) return '-';
@@ -166,11 +173,14 @@ export default function AdminDashboard() {
         <p className="muted">
           The goal is exploratory, not guaranteed. With 3 to 5 testers, read each person’s change on its own and the average as a rough guide. No significance tests.
         </p>
+        <p className="muted">
+          Times run from when a part or question appears until it is finished, so they include reading, listening and any interruptions. Check the session notes before reading much into one slow answer.
+        </p>
         <div className="tablewrap">
           <table>
-            <thead><tr><th>Tester</th><th>Order</th><th>Before</th><th>After</th><th>Change</th><th>Scams caught (before → after)</th><th>Real trusted (before → after)</th></tr></thead>
+            <thead><tr><th>Tester</th><th>Order</th><th>Before</th><th>After</th><th>Change</th><th>Scams caught (before → after)</th><th>Real trusted (before → after)</th><th>Time, before → after (min:s)</th><th>Seconds per question, before → after</th><th>Practice (rounds, time)</th></tr></thead>
             <tbody>
-              {t.rows.length === 0 && <tr><td colSpan={7}>No test sessions yet.</td></tr>}
+              {t.rows.length === 0 && <tr><td colSpan={10}>No test sessions yet.</td></tr>}
               {t.rows.map((r) => (
                 <tr key={r.anon_id}>
                   <td>{r.anon_id}</td>
@@ -180,6 +190,9 @@ export default function AdminDashboard() {
                   <td><strong>{signed(r.change_points, ' pts')}</strong></td>
                   <td>{splitCell(r.pre_split, 'scams')} → {splitCell(r.post_split, 'scams')}</td>
                   <td>{splitCell(r.pre_split, 'real')} → {splitCell(r.post_split, 'real')}</td>
+                  <td>{mmss(r.pre_seconds)} → {mmss(r.post_seconds)}</td>
+                  <td>{fmt(r.pre_avg_q_seconds, ' s')} → {fmt(r.post_avg_q_seconds, ' s')}</td>
+                  <td>{r.practice_rounds} {r.practice_rounds === 1 ? 'round' : 'rounds'}, {mmss(r.practice_seconds)}</td>
                 </tr>
               ))}
             </tbody>
