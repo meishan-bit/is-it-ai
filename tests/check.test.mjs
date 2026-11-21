@@ -32,7 +32,8 @@ const visible = (text, snippet) => {
 test('rule 1 ID number: SIN with spaces or dashes, contiguous 9 digits (incl. SK health card)', () => {
   assert.ok(hasLabel('My SIN is 123-456-789.', 'id number', '123-456-789'));
   assert.ok(hasLabel('SIN 123 456 789', 'id number', '123 456 789'));
-  assert.ok(hasLabel('Health card 123456789 expires soon', 'id number', '123456789'));
+  assert.ok(hasLabel('Health card 123456789 expires soon', 'health card number', '123456789'), 'a health-card cue names it (from PR #1)');
+  assert.ok(hasLabel('Ref 123456789 on file', 'id number', '123456789'));
 });
 test('rule 2 postal code', () => {
   assert.ok(hasLabel('I live at K1A 0B1 now', 'postal code', 'K1A 0B1'));

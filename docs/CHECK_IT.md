@@ -57,8 +57,8 @@ Where it shows: last on Home under "Got a message right now?", and one link on t
 
 ## Decisions to confirm (where this differs from the brief)
 
-1. **Photo reader.** The brief uses `image-pii-redactor` and PR #1 (`warmUpRedactor`, `analyzeScreenshot`, `renderRedacted`). Those files were not in the v1.1 folder, so v2.0 ships a built-in reader (Tesseract.js) with the same screens. It has **no name finder**, so names are caught only by simple cues ("Hi Dorothy", "Dr. Patel") and by the review. The 20-detail sheet will not fully pass until PR #1's reader is plugged in (next section).
-2. **The nine Canadian rules** were written from the brief's list, with tests. PR #1's `ca-patterns.ts` is the team's tested version and can replace mine.
+1. **Photo reader and name finder (app 2.1.0).** The brief and PR #1 use `image-pii-redactor`. Its AI name model downloads about 279 MB to each phone (just over 3 minutes on Android in the Nov 20 test), so it is **not** used. Check It keeps the built-in reader (Tesseract.js, the same OCR that `image-pii-redactor` runs inside) and finds names with `compromise` (about 150 KB, `src/lib/check/names.ts`) on both photos and pasted text, plus the simple cues ("Hi Dorothy", "Dr. Patel"). It is less accurate than the AI model, so the review screen still matters. On iPhones older than iOS 16.4, compromise cannot load (it uses a look-behind); Check It then falls back to the cues and the review.
+2. **The nine Canadian rules** were written from the brief's list, then merged with PR #1's tested rules in app 2.1.0 (see "PR #1 port" below).
 3. **Six call questions**, not five. The brief's table says 5; its copy table, the answer keys and the mock say 6.
 4. **"No common warning signs found" wording.** The brief's line says "it's real", and its own rule says never to use the word. v2.0 says "That doesn't prove it's genuine. If it asks for money or details, check first." Also, the "In real use…" phone note appears on every screen, so the rule is applied to the verdict text, not that note. The team's own T5 safe step says "the real account": `validate-check.mjs` warns about it; reword it in `tactics.json` if you want the rule to hold word for word.
 5. **Confirm before showing** appears only when showing a detail we hid ourselves. Words the person hid can be shown freely.
@@ -67,21 +67,27 @@ Where it shows: last on Home under "Got a message right now?", and one link on t
 8. **Consent line.** The About page and the review screen say: "A copy of your message with personal details hidden is sent to Anthropic's Claude to be checked. It is not stored by us." Confirm Anthropic's current retention terms before the final consent form.
 9. **Talk to a person** shows the CAFC hours from the brief. Listings differ (9 or 10 a.m.); confirm before any real release.
 
-## Swapping in PR #1's redactor
+## PR #1 port (app 2.1.0)
 
-All screens call only `src/lib/check/engine.ts` (the reader) and `src/lib/check/ca-patterns.ts` (the rules).
-1. Merge PR #1.
-2. In `engine.ts`, replace `createTesseractEngine()` with an object that has `isReady`, `warmUp(onProgress)`, `recognize(canvas) -> OcrWord[]` (text, `bbox` {x0,y0,x1,y1}, `line`), and optionally `detectNames(text) -> Span[]`. Map PR #1's `warmUpRedactor` progress events to `{ stage, percent }` in plain words.
-3. If PR #1's `findCanadianPii` has the same signature (`text, extra? -> {start, end, label}[]`), change the import in `chips`/`CheckFlow`/`handler` to it and delete `ca-patterns.ts`. Keep `tests/check.test.mjs` running against whichever you keep.
-4. Remove `tesseract.js` from `package.json`.
-Send the PR #1 files and the swap can be done and tested for you.
+PR #1 is closed as superseded by this port. What came over:
+
+- **Rules** (into `ca-patterns.ts`, rewritten without look-behind): a link code that wraps onto the next line, Alberta 5-4 health numbers, 3+3 codes and "verification" / "verify" / "password" cues, a card expiry right after a card number with no label, and "health card number" labels from nearby words.
+- **Name clean-up** (into `names.ts`): drop amounts, ordinary words, link and email domains, and names in the phone's status bar.
+- **Tests**: the five fake samples and the Canadian formats, in `tests/check-pr1.test.mjs`.
+- **Licences**: `THIRD_PARTY_NOTICES.md` and `licenses/`.
+
+What did not come over, on purpose:
+
+- `image-pii-redactor` and its 279 MB name model (see decision 1). Its worker also loads from a fixed `/assets/` path, which Next.js does not serve without extra copying.
+- Keeping the first word of a link path visible (`/track`). v2 hides the whole path, because a path word can be a name (`site.com/dorothy`).
+- The Luhn check on card numbers. v2 hides every 13-19 digit number, because a photo can misread a digit.
 
 ## Sign-off checklist (from the brief)
 
 | Item | Status |
 |------|--------|
 | Only one POST to /api/check, redacted PNG or masked text | Done in browser test. Re-check with a phone's network inspector. |
-| 20-detail Android sheet through the app | **Open**: needs real OCR and the name finder |
+| 20-detail Android sheet through the app | **Open**: re-run on a phone with app 2.1.0 (compromise name finder) |
 | No message text in Vercel logs or Supabase after 10 checks | Database checked. Check Vercel logs yourself. |
 | Stop, Back and leaving clear the image | Done (unmount and after result) |
 | Every path reaches a result with taps only | Done |
