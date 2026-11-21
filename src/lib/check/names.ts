@@ -15,7 +15,10 @@ import { wordsToText } from './chips';
  * The clean-up filters (amounts, short words, link and email domains, the phone's status bar) are from PR #1's Android test.
  */
 
-type Doc = { people(): { out(format: 'offset'): Array<{ offset: { start: number; length: number } }> } };
+type Doc = {
+  people(): { out(format: 'offset'): Array<{ offset: { start: number; length: number } }> };
+  has(match: string): boolean;
+};
 type Nlp = (text: string) => Doc;
 
 let loading: Promise<Nlp> | null = null;
@@ -43,8 +46,23 @@ const TITLE = /^(?:Mr|Mrs|Ms|Miss|Mx|Dr|Prof|Mme|Mlle)\.?\s+/;
 const MONEY = /\$\s?\d|\d[\d,]*\.\d{2}\b|\bdollars?\b|\bCAD\b/i;
 
 /**
+ * First names that are also ordinary words or brands. A capital letter at the start of a sentence would make them look
+ * like names ("Bill due Friday", "Chase Bank"), and hiding them could hide a scam clue.
+ */
+const AMBIGUOUS_FIRST = new Set([
+  'bill', 'mark', 'grace', 'pat', 'jack', 'chase', 'will', 'may', 'rose', 'june', 'april', 'august', 'hope', 'joy', 'faith',
+  'dawn', 'penny', 'frank', 'art', 'sterling', 'summer', 'autumn', 'christian', 'royal', 'duke', 'earl', 'sunny', 'rich', 'guy',
+]);
+/** Words that make a "name" a business, not a person ("Chase Bank", "Canada Post", "Northshore Power"). */
+const ORG_WORDS = new Set([
+  'bank', 'post', 'agency', 'revenue', 'services', 'service', 'support', 'power', 'mobile', 'energy', 'credit', 'union',
+  'insurance', 'inc', 'ltd', 'corp', 'company', 'department', 'dept', 'clinic', 'pharmacy', 'police', 'court', 'canada',
+]);
+
+/**
  * Tidies the finder's raw spans: trims punctuation and titles ("Mr. Davies," -> "Davies"), and drops amounts, short or
- * ordinary words, lowercase words and anything touching a link or email domain (those are scam clues and stay visible).
+ * ordinary words, lowercase words, business names, first names that are also words (Bill, Chase) and anything touching a
+ * link or email domain (those are scam clues and stay visible). Cue names ("Hi Bill") are still caught by ca-patterns.ts.
  */
 export function cleanNameSpans(raw: Array<{ start: number; end: number }>, text: string): Span[] {
   const keep = findKeepZones(text);
@@ -59,9 +77,36 @@ export function cleanNameSpans(raw: Array<{ start: number; end: number }>, text:
     const s = text.slice(start, end);
     if (s.length < 2 || !/^\p{Lu}/u.test(s)) continue;
     if (MONEY.test(s)) continue;
-    if (s.split(/\s+/).every((w) => NOT_NAMES.has(w.toLowerCase()))) continue;
+    const parts = s.split(/\s+/).map((w) => w.toLowerCase());
+    if (parts.every((w) => NOT_NAMES.has(w))) continue;
+    if (AMBIGUOUS_FIRST.has(parts[0]) || parts.some((w) => ORG_WORDS.has(w))) continue;
     if (keep.some((k) => start < k.end && end > k.start)) continue;
     out.push({ start, end, label: 'name' });
+  }
+  return out;
+}
+
+const CAP_WORD = /[A-Z][a-z]+(?:[-'\u2019][A-Z][a-z]+)?/g;
+
+/**
+ * Backup for compromise: it drops a whole name when the surname is also an ordinary word ("Susan Park", "Ann Hill").
+ * A word that is a first name on its own is a name, together with a capitalised word right after it on the same line.
+ */
+function firstNameSpans(text: string, nlp: Nlp): Array<{ start: number; end: number }> {
+  const out: Array<{ start: number; end: number }> = [];
+  const cache = new Map<string, boolean>();
+  const re = new RegExp(CAP_WORD.source, 'g');
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (/[\p{L}\p{N}]/u.test(text[m.index - 1] ?? '')) continue;
+    const word = m[0];
+    if (AMBIGUOUS_FIRST.has(word.toLowerCase()) || NOT_NAMES.has(word.toLowerCase())) continue;
+    if (!cache.has(word)) cache.set(word, nlp(word).has('#FirstName'));
+    if (!cache.get(word)) continue;
+    let end = m.index + word.length;
+    const next = /^ ([A-Z][a-z]+(?:[-'\u2019][A-Z][a-z]+)?)/.exec(text.slice(end));
+    if (next && !NOT_NAMES.has(next[1].toLowerCase())) end += next[0].length;
+    out.push({ start: m.index, end });
   }
   return out;
 }
@@ -75,7 +120,7 @@ export async function findNames(text: string): Promise<Span[]> {
       .people()
       .out('offset')
       .map((p) => ({ start: p.offset.start, end: p.offset.start + p.offset.length }));
-    return cleanNameSpans(raw, text);
+    return cleanNameSpans([...raw, ...firstNameSpans(text, nlp)], text);
   } catch {
     return [];
   }

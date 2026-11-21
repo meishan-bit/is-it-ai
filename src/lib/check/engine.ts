@@ -97,10 +97,58 @@ export function assignLines(words: Array<{ text: string; bbox: Box }>): OcrWord[
   return out;
 }
 
+type TessWord = { text: string; bbox: Box };
 type TessWorker = {
-  recognize(image: unknown): Promise<{ data: { words?: Array<{ text: string; bbox: Box }> } }>;
+  recognize(image: unknown): Promise<{ data: { words?: TessWord[] } }>;
+  setParameters(params: Record<string, string>): Promise<unknown>;
   terminate(): Promise<unknown>;
 };
+
+const area = (b: Box): number => Math.max(0, b.x1 - b.x0) * Math.max(0, b.y1 - b.y0);
+function overlapShare(a: Box, b: Box): number {
+  const w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+  const h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+  if (w <= 0 || h <= 0) return 0;
+  return (w * h) / Math.max(1, Math.min(area(a), area(b)));
+}
+
+/**
+ * Joins the words from two reads of the same picture. Every word from the first read is kept; a word from the second read
+ * is added only where the first read found nothing (it covers less than 30% of any first-read word).
+ */
+export function mergeWordPasses(first: TessWord[], second: TessWord[]): TessWord[] {
+  const out = first.filter((w) => w.text.trim());
+  for (const w of second) {
+    if (!w.text.trim()) continue;
+    if (out.some((k) => overlapShare(k.bbox, w.bbox) > 0.3)) continue;
+    out.push(w);
+  }
+  return out;
+}
+
+/**
+ * A copy of the picture where each pixel takes its darkest colour channel, then light and dark are swapped.
+ * White text on any coloured bubble (blue, green, grey) becomes black text on a light background, so it is read in
+ * dark mode too. Black text on a pale coloured bubble (yellow) can fade here; the second read covers that.
+ */
+export function minChannelInverted(source: HTMLCanvasElement): HTMLCanvasElement {
+  const out = document.createElement('canvas');
+  out.width = source.width;
+  out.height = source.height;
+  const ctx = out.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return source;
+  ctx.drawImage(source, 0, 0);
+  const img = ctx.getImageData(0, 0, out.width, out.height);
+  const d = img.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const v = 255 - Math.min(d[i], d[i + 1], d[i + 2]);
+    d[i] = v;
+    d[i + 1] = v;
+    d[i + 2] = v;
+  }
+  ctx.putImageData(img, 0, 0);
+  return out;
+}
 type TessModule = {
   createWorker: (lang: string, oem?: number, options?: { logger?: (m: { status: string; progress: number }) => void }) => Promise<TessWorker>;
 };
@@ -123,10 +171,32 @@ function createTesseractEngine(): PhotoEngine {
       });
       onProgress?.({ stage: 'Ready', percent: 100 });
     },
+    /**
+     * Reads the picture twice and joins the words, because no single read gets every chat screenshot (Nov 21 phone test):
+     *   1. the min-channel copy: catches white text on coloured bubbles (a blue reply bubble in dark mode was missed entirely);
+     *   2. the original with adaptive thresholding: catches dark text on pale coloured bubbles, which read 1 can fade.
+     * Adaptive thresholding alone missed the sender's phone number at the top of a dark screenshot, so read 1 comes first.
+     */
     async recognize(source) {
-      if (!worker) throw new Error('reader_not_ready');
-      const res = await worker.recognize(source);
-      return assignLines((res.data.words ?? []).map((w) => ({ text: w.text, bbox: { x0: w.bbox.x0, y0: w.bbox.y0, x1: w.bbox.x1, y1: w.bbox.y1 } })));
+      const w = worker;
+      if (!w) throw new Error('reader_not_ready');
+      const copy = minChannelInverted(source);
+      const words = (res: { data: { words?: TessWord[] } }) =>
+        (res.data.words ?? []).map((x) => ({ text: x.text, bbox: { x0: x.bbox.x0, y0: x.bbox.y0, x1: x.bbox.x1, y1: x.bbox.y1 } }));
+      try {
+        await w.setParameters({ thresholding_method: '0' });
+        const first = words(await w.recognize(copy));
+        await w.setParameters({ thresholding_method: '1' });
+        const second = words(await w.recognize(source));
+        return assignLines(mergeWordPasses(first, second));
+      } finally {
+        await w.setParameters({ thresholding_method: '0' }).catch(() => undefined);
+        if (copy !== source) {
+          copy.getContext('2d')?.clearRect(0, 0, copy.width, copy.height);
+          copy.width = 0;
+          copy.height = 0;
+        }
+      }
     },
     detectNames: (text) => findNames(text),
     async dispose() {

@@ -7,6 +7,7 @@ import { findCanadianPii } from '../src/lib/check/ca-patterns';
 import { chipsFromText, maskedText } from '../src/lib/check/chips';
 import { cleanNameSpans, dropStatusBar, findNames } from '../src/lib/check/names';
 import { REDACTION_LABELS } from '../src/lib/check/labels';
+import { assignLines, mergeWordPasses } from '../src/lib/check/engine';
 
 // The five test samples from PR #1, as OCR text. "\n" marks a line break in the screenshot.
 const SAMPLES = {
@@ -159,6 +160,48 @@ test('status bar: names in the top strip of a tall screenshot are dropped', () =
   const spans = [{ start: 0, end: 6, label: 'name' }, { start: 7, end: 13, label: 'name' }];
   assert.deepEqual(dropStatusBar(spans, words, 1000, 2000).map((s) => s.start), [7]);
   assert.equal(dropStatusBar(spans, words, 1000, 1200).length, 2, 'not a tall screenshot: nothing dropped');
+});
+
+// ------------------------------------------------------------------ Nov 21 phone test: blue reply bubble in dark mode
+test('name finder: the reply bubble from the Nov 21 phone test, once read, hides both names', async () => {
+  const t = "Oh no Tyler! I'm calling him\nnow. Love, Grandma Ruth";
+  const names = (await findNames(t)).map((s) => t.slice(s.start, s.end));
+  assert.ok(names.includes('Tyler'), JSON.stringify(names));
+  assert.ok(names.some((n) => n.includes('Ruth')), JSON.stringify(names));
+});
+
+test('name finder: a surname that is also an ordinary word ("Susan Park") is still hidden', async () => {
+  const t = 'Call me, Susan Park\nat 306-555-0123. This is Ann Hill.';
+  const names = (await findNames(t)).map((s) => t.slice(s.start, s.end));
+  assert.ok(names.includes('Susan Park'), JSON.stringify(names));
+  assert.ok(names.some((n) => n.startsWith('Ann')), JSON.stringify(names));
+});
+
+test('name finder: first names that are also words or brands stay visible (Bill, Chase, Mark, May)', async () => {
+  const t = 'Bill due Friday. Chase Bank alert: Mark this as urgent. May 25 is the deadline. Pay with Interac at Canada Post.';
+  assert.deepEqual((await findNames(t)).map((s) => t.slice(s.start, s.end)), []);
+  const hi = 'Hi Bill, your parcel is waiting.';
+  assert.ok(hidden(hi, await findNames(hi)).includes('Bill'), 'with a cue word, the name is still hidden');
+});
+
+test('name finder: across the app\'s 20 scenarios, only people\'s names are found (no brands or clues)', async () => {
+  const { scenarios } = JSON.parse(readFileSync(new URL('../content/scenarios.json', import.meta.url), 'utf8'));
+  const found = new Set();
+  for (const s of scenarios) {
+    const t = [s.sender_label, s.message, s.transcript].filter(Boolean).join('\n');
+    for (const n of await findNames(t)) found.add(t.slice(n.start, n.end));
+  }
+  assert.deepEqual([...found].sort(), ['Cole', 'Daniel', 'Emily', 'Harris', 'Jake', 'Linda', 'Patel', 'Richard']);
+});
+
+test('two reads: words from the second read are added only where the first found nothing', () => {
+  const W = (text, x0, y0, x1, y1) => ({ text, bbox: { x0, y0, x1, y1 } });
+  const first = [W('+1', 330, 355, 370, 390), W('(306)', 380, 355, 470, 390), W('Grandma', 66, 640, 250, 680)];
+  const second = [W('(306)', 382, 356, 468, 391), W('Grandma', 64, 641, 251, 679), W('Oh', 385, 1150, 430, 1190), W('Ruth', 820, 1205, 905, 1245)];
+  const merged = mergeWordPasses(first, second).map((w) => w.text);
+  assert.deepEqual(merged, ['+1', '(306)', 'Grandma', 'Oh', 'Ruth']);
+  const lines = assignLines(mergeWordPasses(first, second));
+  assert.deepEqual(lines.map((w) => w.text), ['+1', '(306)', 'Grandma', 'Oh', 'Ruth'], 'reading order is by position, not by read');
 });
 
 test('no look-behind in Check It source files that load with the page (older iPhones cannot load them)', () => {
