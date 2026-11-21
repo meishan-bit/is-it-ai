@@ -3,6 +3,9 @@
 All notable changes to **Is It AI?**. The app version (package.json) and the content version (content/meta.json) are tracked separately.
 Format: [app x.y.z] for code, [content x.y.z] for scenarios, glossary and tactic guides.
 
+## [content 2.2.1] - 2026-11-21
+- Check It choose screen: heading "What did you get?" is now "What do you want to check?" (content/check.json 1.0.1). Read-aloud text uses the same string. Scenarios, glossary, tactics and test forms unchanged.
+
 ## [app 2.0.0] - 2026-11-21
 - Check It: check a message you got, from a photo or screenshot, a pasted message, or answers about a phone call. Personal details are hidden on the phone and reviewed with tap-to-hide chips before anything is sent. The result counts warning signs, never says safe, and always ends with a vetted next step, Report it and Talk to a person (sample number (613) 555-0142).
 - Check It is last on Home under "Got a message right now?" and has one link on the practice Finished screen. It is hidden during test sessions; /check shows a locked screen instead.

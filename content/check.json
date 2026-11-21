@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "notes": "Copy for Check It, from the Check It Build Brief (Nov 20) and the Workflow Screens. Phone numbers are NANPA fictional (555-0100 to 555-0199). Keep every number in this file as (613) 555-0142 until the team picks a real line.",
   "sample_number": {
     "display": "(613) 555-0142",
@@ -56,7 +56,7 @@
     "finished_button": "Check a message I got",
     "locked_heading": "Check It opens after your test session",
     "locked_body": "Check It opens after your test session. You can still talk to a person.",
-    "choose_heading": "What did you get?",
+    "choose_heading": "What do you want to check?",
     "choose_privacy": "Personal details are hidden on your phone before anything is sent.",
     "photo_button": "A photo or screenshot",
     "photo_note": "Of a text, email or letter",
