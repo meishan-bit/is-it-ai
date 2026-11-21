@@ -3,6 +3,9 @@
 All notable changes to **Is It AI?**. The app version (package.json) and the content version (content/meta.json) are tracked separately.
 Format: [app x.y.z] for code, [content x.y.z] for scenarios, glossary and tactic guides.
 
+## [app 2.1.1] - 2026-11-21
+- Check It photos: each picture is read twice and the words joined, so white text on a coloured bubble in dark mode (a blue reply bubble was skipped in the Nov 21 phone test) and dark text on a pale bubble are both read. Name finder: names whose surname is also a word (Susan Park) are hidden; Bill, Mark, Chase, May and business names (Chase Bank, Canada Post) are not treated as names.
+
 ## [app 2.1.0] - 2026-11-21
 - Check It: PR #1 port. A name finder (compromise, about 150 KB, on the phone) now runs on photos and pasted text, so names with no cue word are hidden. PR #1's rules added: wrapped link codes, Alberta health numbers, 3+3 and verification codes, card expiry right after a card, health-card labels. PR #1's tests and licences added. image-pii-redactor and its 279 MB model are not used.
 
